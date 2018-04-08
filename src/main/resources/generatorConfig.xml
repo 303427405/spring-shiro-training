@@ -42,20 +42,54 @@
         </javaClientGenerator>
 
         <!-- oracle 使用 schema 对应 用户名称空间 mysql 使用 catalog 对应 数据库 -->
-        <!--<table schema="shiro" tableName="%" enableCountByExample="false"-->
-        <!--enableDeleteByExample="false" enableUpdateByExample="false"-->
-        <!--selectByExampleQueryId="false" enableSelectByExample="false">-->
-        <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-        <!--</table>-->
+        <table domainObjectName="CreateCubicCommonProblem" tableName="t_create_cubic_common_problem" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
-        <table schema="shiro" tableName="SysLog" domainObjectName="SysLog"
-               enableCountByExample="false"
-               enableDeleteByExample="false"
-               enableUpdateByExample="false"
-               selectByExampleQueryId="false"
-               enableSelectByExample="false">
+        <table domainObjectName="CreateCubicCoreTeam" tableName="t_create_cubic_core_team" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
+
+        <table domainObjectName="CreateCubicCustomerWitness" tableName="t_create_cubic_customer_witness" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicDevelopmentHistory" tableName="t_create_cubic_development_history" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicDownload" tableName="t_create_cubic_download" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicEnterpriseService" tableName="t_create_cubic_enterprise_service" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicHonor" tableName="t_create_cubic_honor" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicIndustrialLayout" tableName="t_create_cubic_industrial_layout" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicNewDynamic" tableName="t_create_cubic_new_dynamic" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicRecruit" tableName="t_create_cubic_recruit" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicSpacePlan" tableName="t_create_cubic_space_plan" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
+        <table domainObjectName="CreateCubicTalentIdea" tableName="t_create_cubic_talent_idea" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
     </context>
 </generatorConfiguration>
 

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.king.mapper.CreateCubicRecruitMapper" >
+  <resultMap id="BaseResultMap" type="com.king.model.CreateCubicRecruit" >
+    <id column="recruitId" property="recruitid" jdbcType="INTEGER" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="jobRequire" property="jobrequire" jdbcType="VARCHAR" />
+    <result column="contentDesc" property="contentdesc" jdbcType="VARCHAR" />
+    <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    recruitId, job, imgUrl, jobRequire, contentDesc, createTime, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_create_cubic_recruit
+    where recruitId = #{recruitid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_create_cubic_recruit
+    where recruitId = #{recruitid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.king.model.CreateCubicRecruit" >
+    insert into t_create_cubic_recruit (recruitId, job, imgUrl, 
+      jobRequire, contentDesc, createTime, 
+      updateTime)
+    values (#{recruitid,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, 
+      #{jobrequire,jdbcType=VARCHAR}, #{contentdesc,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.king.model.CreateCubicRecruit" >
+    insert into t_create_cubic_recruit
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recruitid != null" >
+        recruitId,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="imgurl != null" >
+        imgUrl,
+      </if>
+      <if test="jobrequire != null" >
+        jobRequire,
+      </if>
+      <if test="contentdesc != null" >
+        contentDesc,
+      </if>
+      <if test="createtime != null" >
+        createTime,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recruitid != null" >
+        #{recruitid,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="jobrequire != null" >
+        #{jobrequire,jdbcType=VARCHAR},
+      </if>
+      <if test="contentdesc != null" >
+        #{contentdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.king.model.CreateCubicRecruit" >
+    update t_create_cubic_recruit
+    <set >
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="jobrequire != null" >
+        jobRequire = #{jobrequire,jdbcType=VARCHAR},
+      </if>
+      <if test="contentdesc != null" >
+        contentDesc = #{contentdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where recruitId = #{recruitid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.king.model.CreateCubicRecruit" >
+    update t_create_cubic_recruit
+    set job = #{job,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      jobRequire = #{jobrequire,jdbcType=VARCHAR},
+      contentDesc = #{contentdesc,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where recruitId = #{recruitid,jdbcType=INTEGER}
+  </update>
+</mapper>
