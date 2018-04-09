@@ -702,7 +702,7 @@ CREATE TABLE `t_create_cubic_recruit` (
   `job` varchar(100) NOT NULL DEFAULT '' COMMENT '岗位',
   `imgUrl` varchar(100) NOT NULL DEFAULT '' COMMENT '图片地址',
   `jobRequire` varchar(1000) NOT NULL DEFAULT '' COMMENT '岗位要求',
-  `contentDesc` varchar(100) NOT NULL DEFAULT '' COMMENT '工作内容',
+  `contentDesc` varchar(1000) NOT NULL DEFAULT '' COMMENT '工作内容',
   `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`recruitId`)

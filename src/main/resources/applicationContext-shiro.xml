@@ -30,6 +30,8 @@
             <value>
                 /commons/** = anon <!-- 不需要认证 -->
                 /static/** = anon
+                /recruit/* = anon
+                /talentIdea/* = anon
                 /login = anon
                 /** = authc <!-- 需要认证 -->
             </value>

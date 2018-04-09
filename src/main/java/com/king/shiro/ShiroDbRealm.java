@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.king.model.User;
 import com.king.service.RoleService;
 import com.king.service.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

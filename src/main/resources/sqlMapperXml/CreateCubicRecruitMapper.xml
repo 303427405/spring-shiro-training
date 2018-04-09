@@ -114,4 +114,11 @@
       updateTime = #{updatetime,jdbcType=TIMESTAMP}
     where recruitId = #{recruitid,jdbcType=INTEGER}
   </update>
+
+  <select id="select" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_create_cubic_recruit
+    order by recruitId desc
+  </select>
 </mapper>
