@@ -796,3 +796,14 @@ INSERT INTO `user_role` VALUES ('61', '1', '2');
 INSERT INTO `user_role` VALUES ('62', '1', '7');
 INSERT INTO `user_role` VALUES ('63', '13', '2');
 INSERT INTO `user_role` VALUES ('64', '14', '7');
+
+DROP TABLE IF EXISTS `t_create_cubic_contact_us`;
+CREATE TABLE `t_create_cubic_contact_us` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `content` varchar(200) NOT NULL,
+  `imgUrl` varchar(100) NOT NULL,
+  `type` int(11) unsigned NOT NULL COMMENT '类型(1.顶部 2.产业资源 3.合作业务)',
+  `createTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updateTime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
