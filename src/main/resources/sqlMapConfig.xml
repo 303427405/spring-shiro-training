@@ -32,5 +32,6 @@
         <mapper resource="sqlMapperXml/SysLogMapper.xml"/>
         <mapper resource="sqlMapperXml/CreateCubicRecruitMapper.xml"/>
         <mapper resource="sqlMapperXml/CreateCubicTalentIdeaMapper.xml"/>
+        <mapper resource="sqlMapperXml/CreateCubicContactUsMapper.xml"/>
     </mappers>
 </configuration> 

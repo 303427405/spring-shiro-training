@@ -32,6 +32,7 @@
                 /static/** = anon
                 /recruit/* = anon
                 /talentIdea/* = anon
+                /contactUs/* = anon
                 /login = anon
                 /** = authc <!-- 需要认证 -->
             </value>
