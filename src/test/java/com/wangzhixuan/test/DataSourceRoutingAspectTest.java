@@ -1,4 +1,4 @@
-package com.king.test;
+package com.wangzhixuan.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

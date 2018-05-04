@@ -1,4 +1,4 @@
-package com.king.test.aop;
+package com.wangzhixuan.test.aop;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;

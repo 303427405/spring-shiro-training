@@ -1,4 +1,4 @@
-package com.king.test.aop;
+package com.wangzhixuan.test.aop;
 
 import org.aspectj.lang.annotation.AfterReturning;   
 import org.aspectj.lang.annotation.Aspect;   

@@ -1,4 +1,4 @@
-package com.king.test.aop;
+package com.wangzhixuan.test.aop;
 
 public class Elephant {
     public void stealBanana(String name){

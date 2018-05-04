@@ -42,5 +42,12 @@ public class TestController extends BaseController {
     public String dataGrid(Model model) {
         return "admin/test";
     }
+    
+    @RequestMapping(value = "/aaaaaaaa", method = RequestMethod.GET)
+    public String aaa(Model model) {
+        return "xt/index";
+    }
+    
+ 
 
 }

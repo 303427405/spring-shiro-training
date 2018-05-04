@@ -30,6 +30,7 @@
             <value>
                 /commons/** = anon <!-- 不需要认证 -->
                 /static/** = anon
+                /test/** = anon
                 /recruit/* = anon
                 /talentIdea/* = anon
                 /contactUs/* = anon
