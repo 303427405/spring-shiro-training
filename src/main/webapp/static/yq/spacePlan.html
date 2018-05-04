@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>空间计划</title>
+		<link rel="stylesheet" type="text/css" href="./css/main.css"/>
+	</head>
+	<body>
+		<div id="wrapper" class="index-bg">
+			<header id="header" class="header" data-url='./layout/header.html'></header>
+			<div class="content">
+				<div class="story">
+					<div class="title-box4">
+						<h2 class="title" v-text="blockTitle"></h2>
+					</div>
+					<ul class="clearfix">
+						<li class="planblock" v-for="item in planList">
+							<div class="p-hd">
+								<img :src="item.imgurl">
+							</div>
+							<div class="p-bd">
+								<div class="title" v-text="item.title"></div>
+								<div class="price">￥{{item.price}}/{{item.unit}}/月起</div>
+								<span class="gang"></span>
+								<p v-text="item.desc"></p>
+							</div>
+							<div class="p-ft">
+								<label>最适合：</label>
+								<ul class="clearfix">
+									<li v-for="point in item.point">{{point}}</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</div>	
+			</div>
+			<footer id="footer" data-url='./layout/footer.html'></footer>
+		</div>
+		<script src="./js/lib/jquery.min.js"></script>
+		<script src="./js/lib/vue.min.js"></script>
+		<script src="./js/common/public.js"></script>
+		<script>
+			var app=new Vue({
+				el:'#wrapper',
+				data:{
+					blockTitle:"入驻创立方",
+					planList:[
+						{
+							imgurl:'./imgs/plan-01.png',
+							title:'联合办公',
+							price:'600',
+							unit:'桌',
+							desc:'在众创空间的联合办公环境中您自己的办公桌。',
+							point:[
+							'创业公司和小型机构','合作与发展','每日使用']
+						},
+						{
+							imgurl:'./imgs/plan-02.jpg',
+							title:'专属办公室',
+							price:'',
+							unit:'',
+							desc:'办公室设施齐全，封闭的可锁定办公室可容纳任何规模的团队。',
+							point:[
+							'1-100 人以上规模的公司','附属和已建立的团队','额外自主性和安全性']
+						},
+						{
+							imgurl:'./imgs/plan-03.png',
+							title:'自主定制空间',
+							price:'600',
+							unit:'桌',
+							desc:'封闭的可锁定办公室可容纳任何规模的团队。可根据企业需求，自主划分、灵活定制',
+							point:['任何规模的公司']
+						}
+					]
+				},
+				created(){
+					this.initPageData();
+				},
+				methods:{
+					initPageData(){//请求页面资源
+						let self=this;
+						// $.ajax({
+						// 	type: "GET",
+						// 	url: "",
+						// 	data:{},
+						// 	dataType: "json",
+						// 	success: function(data){
+						// 	      self.bannerImg=data.xxx;
+						// 	}
+						// })
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

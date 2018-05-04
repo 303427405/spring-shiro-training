@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="./css/main.css"/>
+		<title>走进创立方</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<header id="header" class="header" data-url='./layout/header.html'></header>
+			<div class="banner">
+				<img class="banner-bg" :src="bannerImg">
+				<div class="bannerDiv">
+					<div class="goBTxt">
+						<p v-text="subSlogan"></p>
+						<p v-text="banSlogan"></p>
+					</div>
+				</div>
+			</div>
+			<div class="story index-bg">
+				<div class="content">
+					<h2 class="storyTitle">品牌故事</h2>
+					<div class="storyCont" v-html="storyCont">
+					</div>	
+				</div>
+			</div>
+			<div class="devHistory">
+				<h2 class="title">发展历程</h2>
+				<ul class="clearfix historyImg">
+					<li class="devHisLi" v-for="devItem in devList">
+						<img class="hisimgBg banner-bg" :src="devItem.imgurl"/>
+						<div class="hisIntroduce">
+							<div class="hisintBox" v-for="ditem,index in devItem.items">
+								<p v-if="ditem.time">{{devItem.time}}.{{ditem.time}}</p>
+								<p v-else-if="index==0">{{devItem.time}}</p>
+								<ul class="clearfix">
+									<li v-for="item in ditem.dev"><i>·&nbsp;&nbsp;</i>{{item}}</li>
+								</ul>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="story index-bg">
+				<div class="content">
+					<h2 class="storyTitle">企业文化</h2>
+					<ul class="companyCul clearfix">
+						<li v-for="citem in cultureList">
+							<h5 class="title" v-text="citem.title"></h5>
+							<div class="desc" v-html="citem.desc"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="story odd-bg">
+				<div class="content clearfix">
+					<div class="coreContent">
+						<p class="storyTitle" v-text='block2.title'></p>
+						<p class="storyCont" v-text="block2.desc"></p>
+					</div>
+					<div class="corePicture staff">
+						<img :src="block2.imgurl"/>
+					</div>
+				</div>
+			</div>
+			<div class="personIntroduce index-bg">
+				<ul class="clearfix content">
+					<li v-for="pitem in perList">
+						<div class="perAvatar">
+							<img :src="pitem.avatar" />
+						</div>
+						<p class="perName" v-text="pitem.name"></p>
+						<p class="perPosition" v-text="pitem.post"></p>
+						<div class="gang"></div>
+						<div class="perInfo">
+							<p class="biaoqian" v-for="tag in pitem.tags" v-text="tag"></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="staffStyle story odd-bg">
+				<div class="content clearfix">
+					<div class="coreContent">
+						<p class="storyTitle" v-text="block3.title"></p>
+						<ul class="clearfix">
+							<li v-for="item in block3.list"><i>{{item.dept}}&ensp;:&ensp;</i>{{item.text}}</li>
+						</ul>
+					</div>
+					<div class="corePicture">
+						<img :src="block3.imgurl"/>
+					</div>
+				</div>
+			</div>
+			<div class="story welHonor index-bg">
+				<div class="content">
+					<div class="title-box2">
+						<h2 class="title">荣誉资质</h2>
+					</div>
+					<ul class="honorMenu">
+						<li class="honorlist" v-for="honor in honorList">
+							<p class="honor-year"><i class="icon icon-circle"></i>{{honor.year}}</p>
+							<ul class="clearfix">
+								<li v-for="hitem in honor.list">
+									<p><i class="icon icon-cup"></i>{{hitem.title}}</p>
+									<span><i>------</i>{{hitem.dept}}</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="story customerLink odd-bg">
+				<div class="content">
+					<p class="storyTitle">客户见证</p>
+					<div class="">
+						<ul class="clearfix">
+							<li v-for="item in cusLogo">
+								<img :src="item.imgurl"/>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<footer id="footer" data-url='./layout/footer.html'></footer>
+		</div>
+		<script src="./js/lib/jquery.min.js"></script>
+		<script src="./js/lib/vue.min.js"></script>
+		<script src="./js/common/public.js"></script>
+		<script>
+			var app=new Vue({
+				el:'#wrapper',
+				data:{
+					bannerImg:'./imgs/clf-banner.jpg',
+					banSlogan:'中国领先的产业创新生态构建者',
+					subSlogan:'我们的愿景：',
+					storyCont:`<p>四年前互联网和教育领域创业老兵、杭州新东方学校联合创始人洪根强多年在教育培训领域摸爬滚打，在身边逐渐聚集了一批互联网教育行业的人才。最初，他只是简单地将大家聚集在一起，让大家有一个互相帮助的空间和氛围。</p>
+					<p>在此基础上，洪根强发现不少人在创业路上需要一系列的支持和服务，于是成立了创立方旗下首家“创业公共服务平台”—青创迭代创空间。这也是省内首家公益性“创业公共服务平台”，它以创业者的需求为导向，凭借强大的资源整合能力，成为集创业研究、教育、服务为一体的众创空间。</p>
+					<p>青创迭代创空间全力打造“青创迭代孵化器1.0版”，通过场地服务、天使投资、活动交流、企业经营管理资源嫁接等为高潜创业团队提供支持，搭建创业方和投资方全方位、多层次沟通平台，如被评定为高成长力的入驻项目可以获得最高达500万元的天使投资支持。</p>
+					<p>在青创迭代创空间的基础上，杭州创立方开始缓慢扩张。如今，青创迭代创空间面积已达5000余平方米，先后入驻创业团队两百余个，成为高端“互联网+”创业企业入驻首选之地。除此之外，杭州创立方还在主城区核心区域布局西溪创立方、翠苑创立方、上虞号创立方、孔家里创立方、文华创立方等8大主题垂直园区，总面积约12万平方米，在规划阶段园区约20万平方米，同时已入孵创业项目超500个、举办承办协办创业活动超400场，实际入驻项目融资超40%，三年时间，成为目前我市规模第一的创新生态产业园区运营商。</p>`,
+					devList:[
+						{
+							imgurl:'./imgs/clf-01.jpg',
+							time:'2017',
+							items:[
+								{
+									dev:[
+										'上虞号·创立方 启动',
+										'孔家里·创立方 启动',
+										'西溪·创立方获评杭州市众创空间',
+										'杭州市" 两创示范 "活动券认定机构',
+									]
+								},
+								{
+									dev:[
+										'开启与众安控股全面战略合作',
+										'开启与金龙集团全面战略合作',
+										'杭州市 "现代服务业先进企业"'
+									]
+								}
+							]
+						},
+						{
+							imgurl:'./imgs/clf-02.jpg',
+							time:'2016',
+							items:[
+								{
+									time:'12',
+									dev:[
+										'2016 "十佳创业服务机构"',
+										'西湖区小微企业成长计划基地',
+										'2016 "十佳创业服务机构·金芒奖"',
+										'2016-2017年度"易启计划共同行动伙伴"',
+									]
+								},
+								{
+									time:'9',
+									dev:[
+										'常青藤·创立方启动',
+										'管理面积超过40000方,入孵企业累计获融3.5亿元',
+										'杭州市人才工作领导小组、市科委、市财政',
+										'市科协联合授牌的"学会协同创新服务基地"'
+									]
+								}
+							]
+						},
+						{
+							imgurl:'./imgs/clf-03.jpg',
+							time:'2015',
+							items:[
+								{
+									time:'12',
+									dev:[
+										'创立方团队建立青创迭代空间',
+										'管理面积超30000方',
+										'2015十佳创业服务场地',
+										'创立方获得pr-A轮融资',
+									]
+								},
+								{
+									time:'10',
+									dev:[
+										'创立方成立',
+										'2015年度 "杭州市十佳公益创业活动场地"'
+									]
+								}
+							]
+						},
+						{
+							imgurl:'./imgs/clf-04.jpg',
+							time:'2014',
+							items:[
+								{
+									dev:[
+										'翠苑·创立方启动、西溪·创立方启动',
+										'浙江青年创业学院正式挂牌',
+										'浙江省首批 "市级众创空间"',
+										'浙江省首批 "省级众创空间"',
+									]
+								},
+								{
+									dev:[
+										'浙江省首批 "市级众创空间"',
+										'杭州市众创空间联盟·副理事长单位'
+									]
+								}
+							]
+						},
+					],
+					cultureList:[
+						{
+							title:'共创',
+							desc:'<p>创立方倡导共创、共进，不断为行业与企业创造更高价值，最终实现共赢、共享。</p>',
+						},
+						{
+							title:'共享',
+							desc:`<p>共享空间、共享社群、共享经济，资源的共享、成果的共享。</p>
+								<p>创立方与企业共享资源，也进一步推动企业间资源共享；</p>
+								<p>创立方与我们的员工共享企业成长和成功；</p>
+								<p>创立方与投资方共享企业价值</p>`,
+						},
+						{
+							title:'创新',
+							desc:'<p>创立方倡导技术创新、模式创新，鼓励各类微创新，</p><p>助推企业以创新为内涵的，产业转型升级</p>',
+						},
+						{
+							title:'生态',
+							desc:'创立方倡导构建完善的产业创新生态和创业生态，为企业提供全产业链环节的产业服务和全方位的企业服务',
+						}
+					],
+					block2:{
+						desc:'创立方核心创始团队融合了新东方系创业者、阿里系创业者、浙大系创业者以及房地产资深专业人士。高层管理人员分别来自互联网新媒体、创投、房地产、创业教育、酒店等行业。这些人员有的曾经历多个园区的开发运营、有的具备多次创业的经验，无论是地段选择、产品研发、运营、建设和运营成本控制还是对创业痛点的应对都具备丰富的经验。',
+						title:'核心团队',
+						imgurl:'./imgs/clf-05.jpg'
+					},
+					perList:[
+						{
+							avatar:'./imgs/user.png',
+							name:'洪根强',
+							post:'创始人&董事长',
+							tags:['互联网和教育领域创业老兵','杭州新东方学校联合创始人','天使投资人','浙江青年创业学院创始院长']
+						},
+						{
+							avatar:'./imgs/user.png',
+							name:'倪建水',
+							post:'董事总经理、合伙人',
+							tags:['" 20年以上地产投资、开发、标准化运营管理以及地产基金管理经验；曾负责香溢白金海岸、香溢大厦、御江帝景、和达涵舍、和达东东城等项目的开发、运营工作，参与开发众多商业、办公、公寓、酒店项目。"']
+						},
+						{
+							avatar:'./imgs/user.png',
+							name:'陈栋伟',
+							post:'联合创始人、执行副总经理',
+							tags:['" 10年以上商业地产、产业地产投资开发及招商运营经验。拥有丰富的土地一级整理、产业新城及商业地产项目等投资运营经验；曾参与浙商新城（产业新城）、即墨中纺服装城、杭州百联奥特莱斯、武汉东部购物公园等项目的投资、运营工作。擅长商业定位、产业定位、资源导入和运营管理。"']
+						},
+						{
+							avatar:'./imgs/user.png',
+							name:'薛华',
+							post:'联合创始人、青创学院执行院长',
+							tags:['" 10年以上企业发展、创业培训、管理培训经验；曾就职于浙江某上市公司，任职董秘等重要岗位；乐创会联合创始人，曾在多个机构任职创业导师。"']
+						},
+						{
+							avatar:'./imgs/user.png',
+							name:'徐杰',
+							post:'财务总监',
+							tags:['"近20年财务管理经验，先后任职于物美商业、常春藤投资及某新三板企业，任职财务经理、财务总监等重要职位。具备丰富的快消品行业、教育行业、互联网行业财务管理经验。"']
+						},
+						{
+							avatar:'./imgs/user.png',
+							name:'陈辉',
+							post:'商务总监',
+							tags:['" 近10年产业园招商经验。曾任职杭州多家知名园区，担任招商负责人，具备丰富的产业招商经验，曾参与东方电子商务园、东方喜福会科技服务大厦、555电商园、上正文化创意产业园等项目的定位招商工作。"']
+						},{
+							avatar:'./imgs/user.png',
+							name:'墨霏',
+							post:'运营总监',
+							tags:['十年产业园运营管理经验，先后任职于佑康集团、文创集团、文泓集团管理岗位，独立负责天堂E谷、星矢部落等项目运营管理工作。']
+						}
+					],
+					block3:{
+						title:'员工风采',
+						imgurl:'./imgs/clf-06.jpg',
+						list:[
+						{
+							dept:'工程',
+							text:'徐战役、路书岗、金繁荣'
+						},
+						{
+							dept:'招商',
+							text:'黄子洋、管豪杰、马奋彬、杜彩、张艳'
+						},
+						{
+							dept:'运营',
+							text:'冯亚、杨昉、李佳琦、刘志春、孔丽文、朱琳琳'
+						},
+						{
+							dept:'品牌',
+							text:'杨杨杨、姜士强'
+						},
+						{
+							dept:'综合',
+							text:'吴燕妮'
+						},
+						{
+							dept:'财务'
+						}
+						]
+					},
+					honorList:[
+						{
+							year:'2017',
+							list:[
+							{
+								title:'杭州市"市级众创空间"',
+								dept:'杭州科学技术委员会'
+							},
+							{
+								title:'浙江省“省级众创空间”',
+								dept:'浙江省科学技术厅'
+							},
+							{
+								title:'杭州市“两创”示范活动券认定机构',
+								dept:'杭州市科技创新企业服务中心'
+							},
+							{
+								title:'杭州市“现代服务业先进企业”',
+								dept:'中共杭州市委、杭州市人民政府'
+							},
+							{
+								title:'省级优秀众创空间',
+								dept:'浙江省科学技术厅'
+							},
+							]
+						},
+						{
+							year:'2016',
+							list:[
+							{
+								title:'学会协同创新服务基地',
+								dept:'杭州市人才工作领导小组、市科委、市财政、市科协联合授牌'
+							},
+							{
+								title:'十佳创业服务机构',
+								dept:'杭州市人力资源和社会保障局'
+							},
+							{
+								title:'十佳创业服务机构金芒奖',
+								dept:'杭州市科学技术委员会 杭州文化广播电视集团'
+							},
+							{
+								title:'易启计划共同行动伙伴',
+								dept:'网易公司'
+							},
+							{
+								title:'西溪街道创新创业服务基地',
+								dept:'西溪街道党工委、西溪街道办事处'
+							},
+							{
+								title:'房地产资产管理生态链综合服务商',
+								dept:'第一财经 中国房地产金融'
+							},
+							]
+						},
+						{
+							year:'2015',
+							list:[
+							{
+								title:'杭州市众创空间联盟副理事长单位',
+								dept:'杭州众创空间联盟'
+							},
+							{
+								title:'现代服务业先进企业',
+								dept:'中共杭州市委、杭州市人民政府'
+							},
+							{
+								title:'杭州市十佳公益创业活动场地',
+								dept:'杭州市人力资源和社会保障局'
+							},
+							{
+								title:'杭州十大孵化器',
+								dept:'浙商大会组委会、浙商杂志社'
+							}
+							]
+						},
+						{
+							year:'2014',
+							list:[
+							{
+								title:'浙江省首批“国家级众创空间”',
+								dept:'中华人民共和国科学技术部'
+							},
+							{
+								title:'浙江省首批“省级众创空间”',
+								dept:'浙江省科学技术厅'
+							},
+							{
+								title:'杭州市首批“市级众创空间”',
+								dept:'杭州市科学技术委员会'
+							}
+							]
+						}
+					],
+					cusLogo:[
+						{
+							imgurl:'./imgs/cliet-logo.png'
+						},
+						{
+							imgurl:'./imgs/cliet-logo.png'
+						},
+						{
+							imgurl:'./imgs/cliet-logo.png'
+						},
+						{
+							imgurl:'./imgs/cliet-logo.png'
+						},
+						{
+							imgurl:'./imgs/cliet-logo.png'
+						},
+						{
+							imgurl:'./imgs/cliet-logo.png'
+						},
+						{
+							imgurl:'./imgs/cliet-logo.png'
+						},
+						{
+							imgurl:'./imgs/cliet-logo.png'
+						},
+					]
+				},
+				created(){
+					this.initPageData();
+				},
+				methods:{
+					initPageData(){//请求页面资源
+						let self=this;
+						// $.ajax({
+						// 	type: "GET",
+						// 	url: "",
+						// 	data:{},
+						// 	dataType: "json",
+						// 	success: function(data){
+						// 	      self.bannerImg=data.xxx;
+						// 	}
+						// })
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

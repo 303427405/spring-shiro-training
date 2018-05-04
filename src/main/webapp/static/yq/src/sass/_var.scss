@@ -1,0 +1,41 @@
+$tColor:#000;
+$textColor:#222222;
+$conWidth:1380px;
+$fontSize:12px!default;
+$navSize:16px;
+$imgurl:'../imgs/';
+$bgDark:#252729;
+$baseOrange:#ef9e00;
+$iconPath:(
+	arrow:10px 6px 'icon-arrow',
+	phone:17px 12px 'icon-phone',
+	cup:22px 22px 'icon-cup',
+	tri:5px 7px 'icon-tri',
+	bind:35px 35px 'icon-bind',
+	cart:34px 34px 'icon-cart',
+	cube:32px 35px 'icon-cube',
+	loc:35px 35px 'icon-loc',
+	printer:34px 34px 'icon-printer',
+	qi:36px 34px 'icon-qi',
+	squ:34px 34px 'icon-squ',
+	world:37px 34px 'icon-world',
+	c01:53px 41px 'icon-c01',
+	c02:51px 40px 'icon-c02',
+	c03:52px 40px 'icon-c03',
+	c04:52px 40px 'icon-c04',
+	c05:51px 40px 'icon-c05',
+	c06:52px 40px 'icon-c06',
+	c07:52px 40px 'icon-c07',
+	c08:53px 41px 'icon-c08',
+	c09:53px 41px 'icon-c09',
+	warning:24px 24px 'icon-warning',
+	form:21px 23px 'icon-form'
+);
+$screen:(
+	large:1920,
+	middle:1600,
+	small:1440
+);
+@mixin boxShadow{
+	box-shadow:0 0 16px rgba(0,0,0,.04);
+}

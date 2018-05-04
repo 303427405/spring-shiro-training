@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="./css/main.css"/>
+		<title>产品构建</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<header id="header" class="header" data-url='./layout/header.html'></header>
+			<div class="story index-bg">
+				<div class="proConst content clearfix">
+					<div class="coreContent">
+						<p class="storyTitle" v-text='block1.title'></p>
+						<p class="storysubTitle" v-text='block1.subtitle'></p>
+						<p class="storyCont" v-html="block1.desc"></p>
+					</div>
+					<div class="corePicture">
+						<img :src="block1.imgurl"/>
+					</div>
+				</div>
+				<div class="welList content">
+					<ul  class="proConst">
+						<li class="clearfix" v-for="art,idx in placeList">
+							<div class="wblock">
+								<div class="wlwenimg" v-if="idx<1">
+									<div class="title-box">
+										<h3 class="title" v-text='block2.title'></h3>
+										<span class="dec"></span>
+									</div>
+									<div class="photo">
+										<img :src="art.imgurl"/>
+									</div>
+								</div>
+								<div v-else class="photoBox">
+									<img :src="art.imgurl"/>
+								</div>
+							</div>
+							<div class="wblock wblock-art">
+								<div class="wlTitle" v-text="art.title"></div>
+								<p class="wlText" v-cloak>{{art.desc}}</p>
+								<em></em>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="support content">
+					<p class="storyTitle" v-text='block3.title'></p>
+					<div class="supportPic">
+						<img :src="supportPic1">
+						<img :src="supportPic2">
+					</div>
+				</div>
+			</div>
+			<footer id="footer" class="index-bg" data-url='./layout/footer.html'></footer>
+		</div>
+		<script src="./js/lib/jquery.min.js"></script>
+		<script src="./js/lib/vue.min.js"></script>
+		<script src="./js/common/public.js"></script>
+		<script>
+			var app=new Vue({
+				el:'#wrapper',
+				data:{
+					block1:{
+						title:'产业规划',
+						subtitle:'交流、学习、一起成长',
+						imgurl:'./imgs/index-06.jpg',
+						desc:'<p>目前创立方办公园区（空间）已布局：<i>青创迭代</i>-IT互联网、<i>西溪·创立方</i>-工业4.0、<i>翠苑·创立方</i>-创业及办公服务、<i>和山·创立方</i>-大学生生活及创业、<i>常春藤·创立方</i>-互联网教育及教育科技、<i>上虞号·创立方</i>-“创新产融”窗口、<i>孔家里·创立方</i>-网络文化村、<i>文华·创立方</i>-互联网+教育科技，8大主题空间；并即将在下城区、西湖区分别布局跨境电商、人工智能、移动互联网垂直三大主题空间（规划中和建设准备中）。</p>'
+					},
+					block2:{
+						title:'产业布局'
+					},
+					block3:{
+						title:'产业支撑'
+					},
+					placeList:[
+						{
+							title:'西溪·创立方：智能制造产业',
+							desc:'创立方办公空间在商务部对外贸易促进局、工信部国际经济技术合作中心等7大政府部门的支持下，与华强北创客中心、米仓资本、智造工坊、华友会、工业4.0商业共同体等机构签订战略合作协议，共同打造智能制造创新平台与产业基地。目前，已成功运营西溪·创立方。园区依托包括智造工坊、加速云、热电厂在内的多家骨干企业的带动作用，引进其他相关企业形成智能制造产业集群，并与东南大学相关实验室、浙江青年创业学院领衔的国内50所知名大学院校合作，为主导产业提供技术支持。西溪·创立方的成功标志着西溪湿地畔的一个区别于传统的以智能制造为核心的工业4.0创业园区的诞生，将产业园区的发展模式推向更新的高度。',
+							url:'#',
+							imgurl:'./imgs/pro-01.jpg'
+						},
+						{
+							title:'翠苑·创立方：创业服务产业',
+							desc:'对于一个创业者来说，资金、经验、人脉是他们面临的最大难题。创立方办公空间携手浙江青年创业学院、微链、思达派、天使湾、天使汇、中汇等机构签订战略合作协议，有效整合创业服务产业链条，给创业者提供必需的支持和服务，建立杭州首个“办公及创业服务”垂直创空间——翠苑·创立方，通过运营与创业相关的知识流、资金流、人才流、信息流等流动性资源服务创业者，提升整体创业创新环境，优化杭城本地创业生态。',
+							url:'#',
+							imgurl:'./imgs/pro-02.jpg'
+						},
+						{
+							title:'青创迭代创空间：互联网金融产业',
+							desc:'青创迭代创空间是创立方依托浙江青年创业学院、迭代资本等创建自身孵化平台，秉承“助力创新企业，创造更大价值”的使命，致力于打造成为综合性的一体化资源共享型的众创空间。青创迭代空间的核心理念是打造完整的创业生态系统，为创业者提供系统化的创业服务，解决入驻企业在创业过程中的后顾之忧。目前，本众创空间面积已达5000余平方米，并与20余家创投基金、近百家创业及办公服务机构形成战略合作关系，先后入驻创业团队近300个，成为高端“互联网+”创业企业入驻首选之地。',
+							url:'#',
+							imgurl:'./imgs/pro-03.jpg'
+						},
+						{
+							title:'上虞号·创立方：创新产融窗口空间',
+							desc:'由上虞经济开发区与创立方联合发起，以上虞城市产业规划与构建为导向，孵化与服务以规模产业化为发展方向的企业。创立方通过普适性服务体系模式复制及针对性个性化服务搭建上虞·创立方产业生态链，参与制定企业入驻与孵化政策及考核指标，为创建“新上虞”提供基础建设，由窗口导入匹配产业与资源到上虞本地，促进当地创新经济发展，创造更多就业机会。',
+							url:'#',
+							imgurl:'./imgs/pro-04.jpg'
+						},
+						{
+							title:'孔家里·创立方 ：文创产业',
+							desc:'与杭州白马湖生态创意城管委会深度合作，定位为以提升SOHO园区环境品质，加快文创产业集聚为目标，以影视创作、数字出版、网络作家（编剧）、互联网文化平台和文创类投资基金等产业为导向，依托创立方产业规划设计理念和运营管理理念，将白马湖孔家里联手打造成“网络文化村”。',
+							url:'#',
+							imgurl:'./imgs/pro-05.jpg'
+						}
+					],
+					supportPic1:"./imgs/pro-06.png",
+					supportPic2:"./imgs/pro-07.png",
+
+				},
+				created(){
+					this.initPageData();
+				},
+				methods:{
+					initPageData(){//请求页面资源
+						let self=this;
+						// $.ajax({
+						// 	type: "GET",
+						// 	url: "",
+						// 	data:{},
+						// 	dataType: "json",
+						// 	success: function(data){
+						// 	      self.bannerImg=data.xxx;
+						// 	}
+						// })
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="./css/main.css"/>
+		<title>新闻动态</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<header id="header" class="header" data-url='./layout/header.html'></header>
+			<div class="newsList index-bg">
+				<div v-if="company" class="company newsItem">
+					<p class="storyTitle" v-text="company.title"></p>
+					<div class="nitem-left">
+						<a :href="company.artList[0].url" :title="company.artList[0].title">
+							<img :src="company.artList[0].imgurl"/>
+						</a>
+					</div>
+					<div class="nitem-right">
+						<a class="first-title" :href="company.artList[0].url" v-text="company.artList[0].title"></a>
+						<ul class="clearfix">
+							<li v-for="art,idx in company.artList" v-if="idx>0">
+								<a :href="art.url" v-text="art.title"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div v-if="brand" class="brand newsItem">
+					<p class="storyTitle" v-text="brand.title"></p>
+					<div class="nitem-left">
+						<a :href="brand.artList[0].url" :title="brand.artList[0].title">
+							<img :src="brand.artList[0].imgurl"/>
+						</a>
+					</div>
+					<div class="nitem-right">
+						<a class="first-title"  :href="brand.artList[0].url" v-text="brand.artList[0].title"></a>
+						<ul class="clearfix">
+							<li v-for="art,idx in brand.artList" v-if="idx>0">
+								<a :href="art.url" v-text="art.title"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div v-if="industry" class="industry newsItem">
+					<p class="storyTitle" v-text="industry.title"></p>
+					<div class="nitem-left">
+						<a :href="industry.artList[0].url" :title="industry.artList[0].title">
+							<img :src="industry.artList[0].imgurl"/>
+						</a>
+					</div>
+					<div class="nitem-right">
+						<a class="first-title" :href="industry.artList[0].url" v-text="industry.artList[0].title"></a>
+						<ul class="clearfix">
+							<li v-for="art,idx in industry.artList" v-if="idx>0">
+								<a :href="art.url" v-text="art.title"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div v-if="newProducts" class="newProducts newsItem">
+					<p class="storyTitle" v-text="newProducts.title"></p>
+					<div class="nitem-left">
+						<a :href="newProducts.artList[0].url" :title="newProducts.artList[0].title">
+							<img :src="newProducts.artList[0].imgurl"/>
+						</a>
+					</div>
+					<div class="nitem-right">
+						<a class="first-title" :href="newProducts.artList[0].url" v-text="newProducts.artList[0].title"></a>
+						<ul class="clearfix">
+							<li v-for="art,idx in newProducts.artList" v-if="idx>0">
+								<a :href="art.url" v-text="art.title"></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="newsBanner">
+				<img class="banner-bg" :src="bannerImg"/>
+			</div>
+			<footer id="footer" data-url='./layout/footer.html'></footer>
+		</div>
+		<script src="./js/lib/jquery.min.js"></script>
+		<script src="./js/lib/vue.min.js"></script>
+		<script src="./js/common/public.js"></script>
+		<script>
+			var app=new Vue({
+				el:'#wrapper',
+				data:{
+					bannerImg:'./imgs/news-banner.jpg',
+					company:{
+						title:'公司动态',
+						artList:[
+						{
+							imgurl:'./imgs/clf-06.jpg',
+							title:'共融同享 共创未来 上虞号·创立方聚智会成功举办',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/clf-06.jpg',
+							title:'入驻省级众创空间是一种怎样的体验？',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/clf-06.jpg',
+							title:'嬛嬛，你还记得白马湖畔的四郎吗？',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/clf-06.jpg',
+							title:'创立方荣膺杭州市“现代服务业先进企业”称号',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/clf-06.jpg',
+							title:'创立方与上虞经济开发区达成合作 旨在打造“双创”大发展新引擎',
+							url:'#',
+						},
+						]
+					},
+					brand:{
+						title:'品牌活动',
+						artList:[
+						{
+							imgurl:'./imgs/news-01.jpg',
+							title:'资本和梦想高速碰撞!互联网行业明星项目路演完美闭幕',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-01.jpg',
+							title:'我不玩《王者荣耀》，但是我有话要说',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-01.jpg',
+							title:'《剪不断理还乱的“员工离职”法律风险》精彩回顾！',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-01.jpg',
+							title:'创立方为企业“私人订制”的财税讲座圆满结束！',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-01.jpg',
+							title:'你的七夕情书和礼物到了,请签收一下~',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-01.jpg',
+							title:'四大项目亮相TMT专场路演 现场吸“睛”！',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-01.jpg',
+							title:'这个夏天，创业的梦想将点燃188创业茶楼！',
+							url:'#',
+						},
+						]
+					},
+					industry:{
+						title:'行业动态',
+						artList:[
+						{
+							imgurl:'./imgs/news-02.jpg',
+							title:'国际双创大赛上看“中国首创',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-02.jpg',
+							title:'浙江双创为啥这么牛？这两个原因也许你想不到……',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-02.jpg',
+							title:'浙江教育报：双创教育，给浙江点赞',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-02.jpg',
+							title:'“接力棒式”的孵化，众创空间的“杭州模式”',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-02.jpg',
+							title:'141家省级众创空间名单公布！快来围观这些双创“胜地”',
+							url:''
+						}
+						]
+					},
+					newProducts:{
+						title:'新品快讯',
+						artList:[
+						{
+							imgurl:'./imgs/news-03.jpg',
+							title:'嬛嬛，你还记得白马湖畔的四郎吗？',
+							url:'#',
+						},
+						{
+							imgurl:'./imgs/news-03.jpg',
+							title:'创立方与上虞经济开发区达成合作 旨在打造“双创”大发展新引擎',
+							url:'#',
+						}
+						]
+					}
+				},
+				created(){
+					this.initPageData();
+				},
+				methods:{
+					initPageData(){//请求页面资源
+						let self=this;
+						// $.ajax({
+						// 	type: "GET",
+						// 	url: "",
+						// 	data:{},
+						// 	dataType: "json",
+						// 	success: function(data){
+						// 	      self.bannerImg=data.xxx;
+						// 	}
+						// })
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

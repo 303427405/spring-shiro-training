@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>企业服务</title>
+		<link rel="stylesheet" type="text/css" href="./css/main.css"/>
+	</head>
+	<body>
+		<div id="wrapper" class="index-bg">
+			<header id="header" class="header" data-url='./layout/header.html'></header>
+			<div class="content">
+				<div class="officeService service">
+					<div class="title-box3">
+						<h2 class="title" v-text="block1.title"></h2>
+						<div class="subtext" v-text="block1.subtext"></div>
+					</div>
+					<div class="basicService">
+						<div class="centerblock">
+							<div class="title" v-text="block1.subtitle1"></div>
+						</div>
+						<div class="service-box">
+							<div class="service-item" v-for="item in basicList">
+								<i class="icon" :class="item.iconClass"></i>
+								<p class="text-center" v-text="item.text"></p>
+							</div>
+						</div>
+					</div>
+					<div class="advService">
+						<div class="title-box3">
+							<h3 class="subtitle" v-text="block1.subtitle2"></h3>
+						</div>
+						<div class="clearfix">
+							<div class="contPhoto">
+								<img :src="block1.subPic">
+							</div>
+							<div class="contAdv">
+								<ul>
+									<li v-for="item in deviceList">
+										<div class="advLeft"><strong v-text="item.title"></strong></div>
+										<div class="advRight"><p v-text="item.desc"></p></div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="creService service">
+					<div class="title-box3">
+						<h2 class="title" v-text="block2.title"></h2>
+					</div>
+					<div class="basicService">
+						<div class="centerblock">
+							<div class="title" v-text="block2.subtitle1"></div>
+						</div>
+						<div class="service-box">
+							<div class="service-item" v-for="item in increList">
+								<i class="icon" :class="item.iconClass"></i>
+								<p class="text-center" v-text="item.text"></p>
+							</div>
+						</div>
+					</div>
+					<div class="advService">
+						<div class="title-box3">
+							<h3 class="subtitle" v-text="block2.subtitle2"></h3>
+						</div>
+						<div class="clearfix">
+							<div class="contPhoto">
+								<img :src="block2.subPic">
+							</div>
+							<div class="contAdv">
+								<ul>
+									<li v-for="item in otherIncreList">
+										<div class="advLeft"><strong v-text="item.title"></strong></div>
+										<div class="advRight"><p v-html="item.desc"></p></div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="proExhibit story odd-bg">
+				<div class="proConst content clearfix">
+					<div class="coreContent">
+						<p class="storyTitle" v-text='block3.title'></p>
+						<p class="storysubTitle" v-text='block3.subtitle'></p>
+						<p class="serCont" v-html="block3.desc"></p>
+					</div>
+					<div class="contAdv">
+						<ul>
+							<li v-for="item in proList">
+								<div class="advLeft"><strong v-text="item.title"></strong></div>
+								<div class="advRight"><p v-text="item.desc"></p></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="content">
+				<div class="service">
+					<div class="title-box3">
+						<h2 class="title" v-text="block4.title"></h2>
+						<div class="subtext" v-text="block4.subtext"></div>
+					</div>
+					<div class="basicService">
+						<div class="centerblock" v-if="docList.length<1">
+							<p>暂无可供下载的文件</p>
+						</div>
+						<div class="service-box">
+							<div class="docbox" v-for="item in docList">
+								<span>{{item.title}}</span><a :href="item.uri">下载</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="service">
+					<div class="title-box3">
+						<h2 class="title" v-text="block5.title"></h2>
+					</div>
+					<div class="problems clearfix">
+						<div class="problem" v-for="item in problemList">
+							<div class="title">{{item.title}}</div>
+							<p class="desc">{{item.desc}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer id="footer" data-url='./layout/footer.html'></footer>
+		</div>
+		<script src="./js/lib/jquery.min.js"></script>
+		<script src="./js/lib/vue.min.js"></script>
+		<script src="./js/common/public.js"></script>
+		<script>
+			var app=new Vue({
+				el:'#wrapper',
+				data:{
+					block1:{
+						title:'办公服务',
+						subtext:'您只需专注于发展自己的业务，其他的交给创立方',
+						subtitle1:'8大基础服务',
+						subtitle2:'优质设施',
+						subPic:'./imgs/ser-01.jpg'
+					},
+					basicList:[
+						{
+							text:'个性空间定制',
+							iconClass:'icon-cube',
+						},
+						{
+							text:'企业注册对接',
+							iconClass:'icon-qi',
+						},
+						{
+							text:'基础行政代管',
+							iconClass:'icon-squ',
+						},
+						{
+							text:'公共场地预定',
+							iconClass:'icon-loc',
+						},
+						{
+							text:'文印及设备租赁',
+							iconClass:'icon-printer',
+						},
+						{
+							text:'办公采购',
+							iconClass:'icon-cart',
+						},
+						{
+							text:'物业服务',
+							iconClass:'icon-world',
+						},
+						{
+							text:'第三方基础服务接入',
+							iconClass:'icon-bind',
+						}
+					],
+					deviceList:[
+						{
+							title:'高速网络',
+							desc:'所有办公区域均配用网线和Wi-Fi连接。'
+						},
+						{
+							title:'公共区域',
+							desc:'专业设计团队精心打造，依据入驻企业应用场景与产业定位，统筹布局各功能区块，定制园区公共区域配套，打造共享服务平台，为企业提供完美的社交场所。'
+						},
+						{
+							title:'打印设备',
+							desc:'各园区均配有至少一台高配置打印机、复印机、扫描仪等文印设备。'
+						},
+						{
+							title:'咖啡饮品',
+							desc:'各园区配备创业咖啡厅，承接举办各类创业交流活动，为企业提供交流的平台，为青年创业者指引精神坐标。'
+						},
+						{
+							title:'工作团队',
+							desc:'专业的运营团队为企业提供全方位的帮助，维护每日工作的高效运转，建立不同团队的资源互换，让创新不再有局限。'
+						}
+					],
+					block2:{
+						title:'创业服务',
+						subtitle1:'9大增值服务',
+						subtitle2:'相关服务',
+						subPic:'./imgs/ser-01.jpg'
+					},
+					increList:[
+						{
+							text:'人才直通车',
+							iconClass:'icon-c05',
+						},
+						{
+							text:'融资直通车',
+							iconClass:'icon-c06',
+						},
+						{
+							text:'政府直通车',
+							iconClass:'icon-c09',
+						},
+						{
+							text:'创辅直通车',
+							iconClass:'icon-c02',
+						},
+						{
+							text:'研发直通车',
+							iconClass:'icon-c07',
+						},
+						{
+							text:'展售直通车',
+							iconClass:'icon-c08',
+						},
+						{
+							text:'媒体直通车',
+							iconClass:'icon-c04',
+						},
+						{
+							text:'法务直通车',
+							iconClass:'icon-c03',
+						},
+						{
+							text:'财务直通车',
+							iconClass:'icon-c01',
+						},
+					],
+					otherIncreList:[
+						{
+							title:'政府扶持政策咨询与申报',
+							desc:'<p>运营中心为园区企业提供免费政府扶持政策咨询与申报服务。各项具体内容以运营中心公告为准。</p>'
+						},
+						{
+							title:'公共区域',
+							desc:'<p>运营中心为园区企业提供免费和有偿两种法律咨询服务。其中免费服务为创立方自有的法律顾问，有偿服务为运营中心通过与专业律师事务所合作。同时，通过定期举办现场咨询活动的方式为园区企业提供提供免费的法律咨询服务。</p>'
+						},
+						{
+							title:'投融资服务',
+							desc:'<p>园区与众多风险投资机构，银行金融机构，小额贷款公司，担保公司等建立起密切的合作关系，免费帮助入驻企业向投资机构推荐项目，对接银行、小额贷款公司等金融机构，解决其资金难题。有融资需求的园区企业可在运营中心登记相关需求，此项服务为免费服务。</p><p style="color:#e59800">有融资需求的园区企业可在运营中心登记相关需求，此项服务为免费服务。</p>'
+						}
+					],
+					block3:{
+						title:'产品展厅',
+						subtitle:'交流、学习、一起成长',
+						desc:'打造有归属感的社群：依托园区特色社群，组织企业开展丰富多彩的主题活动，如每月创业培训、观影会、卡牌桌游、读书会、趣味运动会等，丰富企业生活，增强企业凝聚力。'
+					},
+					proList:[
+						{
+							title:'创业加油站',
+							desc:'由“创立方办公空间”组织发起的公益活动。分为创业课程与创业分享两个环节组成，意在为创业者“加油充电”，为创业者“加油打气”。'
+						},
+						{
+							title:'CEO圆桌会',
+							desc:'这是专门为CEO解决企业问题而生的活动头脑和思维间蹦跳的火花带给入驻企业不一样的惊喜'
+						},
+						{
+							title:'狼人杀争霸赛',
+							desc:'在这个集合社交逻辑推理沟通表达等各种功能游戏中，没有繁杂的剧情，没有宏大的世界观，只有狼人、平民、神民之间的「爱恨纠葛」，只要你来玩，保证够烧脑，够过瘾！'
+						},
+						{
+							title:'主题活动',
+							desc:'根据不同季节、不同节日不定时发起各类精彩主题活动。'
+						}
+					],
+					block4:{
+						title:"下载中心",
+						subtext:'您只需专注于发展自己的业务，其他的交给创立方'
+					},
+					docList:[
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+						{
+							uri:'./video/疑问.docx',
+							title:'疑问.docx'
+						},
+					],
+					block5:{
+						title:"常见问题"
+					},
+					problemList:[
+						{
+							title:'企业能享受哪些政策包括创业支持方面、补助方面以及其他一些扶持政策？',
+							desc:'问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容'
+						},
+						{
+							title:'园区是否能够接受党组织关系挂靠？',
+							desc:'问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容'
+						},
+						{
+							title:'园区有哪些第三方提供服务如何收费？',
+							desc:'问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容'
+						},
+						{
+							title:'园区是否会组织一些入驻企业之间的交流活动或者高管之间的业务交流活动？',
+							desc:'问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容'
+						},
+						{
+							title:'园区是否会举办一些对企业比较有意义的培训、分享、交流会等？',
+							desc:'问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容'
+						},
+						{
+							title:'园区能否提供注册地址或者代理代办工商注册？',
+							desc:'问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容问题内容'
+						}
+					]
+				},
+				created(){
+					this.initPageData();
+				},
+				methods:{
+					initPageData(){//请求页面资源
+						let self=this;
+						// $.ajax({
+						// 	type: "GET",
+						// 	url: "",
+						// 	data:{},
+						// 	dataType: "json",
+						// 	success: function(data){
+						// 	      self.bannerImg=data.xxx;
+						// 	}
+						// })
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

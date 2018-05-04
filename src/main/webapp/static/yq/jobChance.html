@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>事业机会</title>
+		<link rel="stylesheet" type="text/css" href="./css/main.css"/>
+	</head>
+	<body>
+		<div id="wrapper" class="index-bg">
+			<header id="header" class="header" data-url='./layout/header.html'></header>
+			<div class="content">
+				<div class="proConst story clearfix">
+					<div class="coreContent concept">
+						<p class="storyTitle" v-text='block1.title'></p>
+						<div class="storyCont" v-html="block1.desc"></div>
+					</div>
+					<div class="corePicture">
+						<img :src="block1.imgurl"/>
+					</div>
+				</div>
+			</div>
+			<div class="post story odd-bg">
+				<div class="content">
+					<p class="storyTitle" v-text='block2.title'></p>
+					<ul>
+						<li v-for="item in postList" class="post-panel clearfix">
+							<div class="post-jobtitle">
+								<img :src='item.imgurl'/>
+								<p v-text="item.jobtitle"></p>
+							</div>
+							<div class="post-demand">
+								<div class="post-hd">
+									<i class="icon icon-warning"></i>
+									<span>职位要求</span>
+								</div>
+								<div class="content" v-html="item.demand_html"></div>
+							</div>
+							<div class="post-content">
+								<div class="post-hd">
+									<i class="icon icon-form"></i>
+									<span>工作内容</span>
+								</div>
+								<div class="content" v-html="item.demand_html"></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="content recuit">
+				<h2 class="title">应聘流程</h2>
+				<div class="clearfix">
+					<div class="recuitLeft">
+						<p>我们会为每一个应聘者提供实现梦想的平台，但不会承诺美好的未来，因为一切都要依靠自己的奋斗，创立方的职位也是其中之一。当您投下简历，您的理想之门已悄然打开：创立方会重视每一份简历，有专人进行处理与跟进。当感受到您具有成为创立方人的特质时，悦耳声音是您了解创立方的开始，亲切的笑脸是创立方热情的邀约，您将在这里面试--当然这不仅仅是我们对您的面试，同样也是您对创立方的初体验。</p>
+						<p>流程不是永恒的，会根据您的个人特点进行适配，在创立方，学历不是全部，经历只是参考。我们会更注重您的诚信度和创新意识，我们邀请专业领域的狂热分子，激情四溢的行业革命家投入创立方发展的下一轮狂潮。</p>
+					</div>
+					<div class="recuitRight">
+						<img src="./imgs/500057723.jpg">
+					</div>
+				</div>
+				<div class="block">
+					<div class="flow">提交简历 → 简历筛选 → 初试 → 复试 → 录用通知</div>
+					<p>创立方人才库：若一月内没有接到录用通知，则视为暂不适合所应聘职位，公司会将您的简历保存在人才库中，如有合适的职位，会另行通知</p>
+				</div>
+			</div>
+			<div class="jobBanner">
+				<img :src="bannerImg" class="banner-bg">
+				<div class="banner-inner">
+					<h2>应聘渠道</h2>
+					<p>联系我们</p>
+					<div class="gang"></div>
+					<p>联系电话：{{phone}}</p>
+					<p>hr邮箱：{{email}}</p>
+					<a :href="'mailto:'+email" class="btn btn-sel">在线投递简历</a>
+				</div>
+			</div>
+			<footer id="footer" data-url='./layout/footer.html'></footer>
+		</div>
+		<script src="./js/lib/jquery.min.js"></script>
+		<script src="./js/lib/vue.min.js"></script>
+		<script src="./js/common/public.js"></script>
+		<script>
+			var app=new Vue({
+				el:'#wrapper',
+				data:{
+					bannerImg:'./imgs/job-banner.jpg',
+					phone:'020-26584585',
+					email:'15485965475@163.com',
+					block1:{
+						title:'人才理念',
+						imgurl:'./imgs/index-06.jpg',
+						desc:'<p><strong>创立方 - 人才=认同（坚守）价值观 + 人品 + 能力</strong></p><p><strong>公平竞争 任人唯贤：</strong>鼓励人才公正、公平、平等竞争，任用有德有才之人；</p><p><strong>职适其能 人尽其才：</strong>人才有不同层次和类型，做到职能相称。既要避免大材小用，也要避免小材大用；</p><p><strong>敢用新人 善用新人：</strong>敢于善于任用资历相对较浅，但是有才能、有魄力、有创新意识的新员工及年轻人</p>'
+					},
+					block2:{
+						title:'招聘岗位',
+					},
+					postList:[
+					{
+						imgurl:'./imgs/icon-hand.png',
+						jobtitle:'招商专员',
+						demand_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>',
+						content_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>'
+					},
+					{
+						imgurl:'./imgs/icon-lightbulb.png',
+						jobtitle:'市场策划',
+						demand_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>',
+						content_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>'
+					},
+					{
+						imgurl:'./imgs/icon-connect.png',
+						jobtitle:'运营专员',
+						demand_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>',
+						content_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>'
+					},
+					{
+						imgurl:'./imgs/icon-per.png',
+						jobtitle:'文案专员',
+						demand_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>',
+						content_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>'
+					}
+					]
+				},
+				created(){
+					this.initPageData();
+				},
+				methods:{
+					initPageData(){//请求页面资源
+						let self=this;
+						// $.ajax({
+						// 	type: "GET",
+						// 	url: "",
+						// 	data:{},
+						// 	dataType: "json",
+						// 	success: function(data){
+						// 	      self.bannerImg=data.xxx;
+						// 	}
+						// })
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

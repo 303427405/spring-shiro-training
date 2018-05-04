@@ -1,0 +1,41 @@
+*{
+	margin: 0;
+	padding: 0;
+  box-sizing:border-box;
+}
+html, body {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+html{
+    font-size:$fontSize;
+}
+body {
+    font-family:"Microsoft YaHei", Helvetica Neue, Helvetica, Arial, sans-serif;
+    color:$tColor;
+}
+ul,li{
+	list-style: none;
+}
+img{
+	border: none;
+}
+a{
+	text-decoration:none;
+}
+i,em{
+	font-style: normal;
+}
+input,textarea,select,button{
+	outline: none;
+}
+h1,h2,h3,h4,h5,h6{
+  font-weight:normal;
+}
+.clearfix:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0;
+}
