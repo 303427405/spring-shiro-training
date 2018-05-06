@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <%@ include file="/commons/basejs.jsp" %>    
+    <%@ include file="/commons/basejs.jsp" %>
     <style>
         body {
             background: #ebebeb;
@@ -166,7 +166,7 @@
                     if (result.success) {
                         window.location.href='${path }/index';
                     }else{
-                         $.messager.show({
+                        $.messager.show({
                             title:'提示',
                             msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>'+result.msg+'</div></div>',
                             showType:'show'
@@ -222,7 +222,7 @@
     </form>
 </div>
 <div style="text-align:center;">
-    <p><a href="http://www.dreamlu.net/" target="_blank">如梦技术</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256912241'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1256912241%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
+    <p><a href="http://www.dreamlu.net/" target="_blank">知行网络技术</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256912241'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1256912241%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
 </div>
 </body>
 </html>
