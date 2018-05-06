@@ -7,7 +7,7 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <%@ include file="/commons/basejs.jsp" %>    
+    <%@ include file="/commons/basejs.jsp" %>
     <style>
         body {
             background: #ebebeb;
@@ -166,7 +166,7 @@
                     if (result.success) {
                         window.location.href='${path }/index';
                     }else{
-                         $.messager.show({
+                        $.messager.show({
                             title:'提示',
                             msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>'+result.msg+'</div></div>',
                             showType:'show'
