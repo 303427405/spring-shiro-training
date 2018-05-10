@@ -23,18 +23,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.king.model.CreateCubicCommonProblem" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into t_create_cubic_common_problem (problem, answer, sort, 
       createTime, updateTime)
     values (#{problem,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.king.model.CreateCubicCommonProblem" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into t_create_cubic_common_problem
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="problem != null" >

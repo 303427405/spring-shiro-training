@@ -1,17 +1,22 @@
 package com.king.controller;
 
 import com.king.code.Result;
+import com.king.common.Constant;
+import com.king.enums.RespCode;
 import com.king.model.CreateCubicContactUs;
 import com.king.model.CreateCubicTalentIdea;
 import com.king.service.ContactUsService;
 import com.king.service.TalentIdeaService;
 import com.king.vo.ContactUsVo;
 import com.king.vo.TalentIdeaVo;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -31,25 +36,31 @@ public class ContactUsController extends BaseController {
     private ContactUsService contactUsService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    @ResponseBody
-    public Result save(@RequestBody ContactUsVo contactUsVo) {
-        Result result = new Result();
+    public ModelAndView save(@RequestBody ContactUsVo contactUsVo) {
+        ModelMap model = new ModelMap();
         try {
             contactUsService.save(contactUsVo);
-            result.setSuccess(true);
-            result.setMsg(String.format("%s成功",contactUsVo.getId() == 0 ? "添加":"修改"));
-            return result;
+            model.addAttribute(Constant.ResponseVO.CODE, RespCode.RESP_CODE_SUCCESS.getCode());
+            model.addAttribute(Constant.ResponseVO.MSG,  String.format("%s成功",contactUsVo.getId() == 0 ? "添加":"修改"));
+            return new ModelAndView("jsonView", model);
         } catch (RuntimeException e) {
-            LOGGER.error("编辑失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            model.addAttribute(Constant.ResponseVO.CODE, RespCode.RESP_CODE_FAILER.getCode());
+            model.addAttribute(Constant.ResponseVO.MSG,  e.getMessage());
+            return new ModelAndView("jsonView", model);
         }
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    @ResponseBody
-    public List<CreateCubicContactUs> list(Integer type) {
-        return contactUsService.list(type);
+    public ModelAndView list(Integer type) {
+        ModelMap model = new ModelMap();
+        model.addAttribute("list",contactUsService.list(type));
+        return new ModelAndView("xt/contactUs",model);
     }
 
+    @RequestMapping(value = "/toAdd", method = RequestMethod.GET)
+    public ModelAndView toAdd(Integer id) {
+        ModelMap model = new ModelMap();
+        model.addAttribute("info",id > 0 ? contactUsService.findById(id) : new CreateCubicContactUs());
+        return new ModelAndView("xt/contactAdd",model);
+    }
 }

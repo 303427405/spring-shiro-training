@@ -4,34 +4,10 @@
         "http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
 
 <configuration>
-    <!-- 进行mybatis 配置 -->
-    <typeAliases>
-        <!-- 为类型 起了别名 -->
-        <typeAlias type="com.king.utils.PageInfo" alias="PageInfo"/>
+    <settings>
 
-        <typeAlias type="com.king.model.User" alias="User"/>
-        <typeAlias type="com.king.vo.UserVo" alias="UserVo"/>
+        <!--指定null时的jdbcType类型为varchar-->
+        <setting name="jdbcTypeForNull" value="VARCHAR"/>
 
-        <typeAlias type="com.king.model.Resource" alias="Resource"/>
-        <typeAlias type="com.king.model.Role" alias="Role"/>
-        <typeAlias type="com.king.model.Organization" alias="Organization"/>
-        <typeAlias type="com.king.model.SysLog" alias="SysLog"/>
-    </typeAliases>
-
-    <!-- 引入自定义 mapper 文件 -->
-    <mappers>
-        <!-- 从库测试 -->
-        <mapper resource="sqlMapperXml/SlaveMapper.xml"/>
-
-        <mapper resource="sqlMapperXml/OrganizationMapper.xml"/>
-        <mapper resource="sqlMapperXml/UserMapper.xml"/>
-        <mapper resource="sqlMapperXml/ResourceMapper.xml"/>
-        <mapper resource="sqlMapperXml/RoleMapper.xml"/>
-        <mapper resource="sqlMapperXml/UserRoleMapper.xml"/>
-        <mapper resource="sqlMapperXml/RoleResourceMapper.xml"/>
-        <mapper resource="sqlMapperXml/SysLogMapper.xml"/>
-        <mapper resource="sqlMapperXml/CreateCubicRecruitMapper.xml"/>
-        <mapper resource="sqlMapperXml/CreateCubicTalentIdeaMapper.xml"/>
-        <mapper resource="sqlMapperXml/CreateCubicContactUsMapper.xml"/>
-    </mappers>
+    </settings>
 </configuration> 

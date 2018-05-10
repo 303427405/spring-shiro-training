@@ -27,25 +27,12 @@
         <result column="organization_id" property="organizationId" jdbcType="INTEGER"/>
         <result column="createdate" property="createdate" jdbcType="TIMESTAMP"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
-
         <result column="organizationName" property="organizationName" jdbcType="VARCHAR"/>
-
-        <collection property="rolesList" ofType="Role">
-            <id column="roleId" property="id"/>
-            <result column="roleName" property="name"/>
-        </collection>
     </resultMap>
     <sql id="Base_Column_List">
     id, loginname, name, password, sex, age, usertype, status, organization_id, createdate, 
     phone
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-
     <select id="findUserByLoginName" resultMap="BaseResultMap" parameterType="java.lang.String">
         select
         <include refid="Base_Column_List"/>
@@ -86,7 +73,7 @@
         where id = #{id}
     </select>
 
-    <select id="findUserPageCondition" resultMap="userVoResultMap" parameterType="PageInfo">
+    <select id="findUserPageCondition" resultMap="userVoResultMap" parameterType="com.king.utils.PageInfo">
         SELECT
         t.id,
         loginname,
@@ -128,7 +115,7 @@
         LIMIT #{from}, #{size}
     </select>
 
-    <select id="findUserPageCount" resultType="java.lang.Integer" parameterType="PageInfo">
+    <select id="findUserPageCount" resultType="java.lang.Integer" parameterType="com.king.utils.PageInfo">
         select count(*) count
         from user t
         <where>
@@ -157,9 +144,6 @@
   </delete>
 
     <insert id="insert" parameterType="com.king.model.User">
-        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
         insert into user (loginname, name, password,
         sex, age, usertype,
         status, organization_id, createdate,
@@ -213,4 +197,12 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="findUserByLoginNameAndPwd" parameterType="com.king.model.User" resultMap="BaseResultMap">
+        SELECT * FROM
+        user t
+        where loginname = #{username}
+        and password = #{pwd}
+    </select>
+
 </mapper>

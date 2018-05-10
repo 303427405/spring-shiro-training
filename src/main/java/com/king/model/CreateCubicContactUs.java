@@ -6,6 +6,8 @@ import java.util.Date;
 public class CreateCubicContactUs implements Serializable {
     private Integer id;
 
+    private String subTitle;
+
     private String content;
 
     private String imgurl;
@@ -64,6 +66,14 @@ public class CreateCubicContactUs implements Serializable {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     @Override

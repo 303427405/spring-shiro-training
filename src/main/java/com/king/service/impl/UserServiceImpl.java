@@ -1,9 +1,7 @@
 package com.king.service.impl;
 
 import com.king.mapper.UserMapper;
-import com.king.mapper.UserRoleMapper;
 import com.king.model.User;
-import com.king.model.UserRole;
 import com.king.service.UserService;
 import com.king.utils.PageInfo;
 import com.king.vo.UserVo;
@@ -13,8 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -22,8 +18,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private UserRoleMapper userRoleMapper;
 
     @Override
     public User findUserByLoginName(String username) {
@@ -51,16 +45,6 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("类型转换异常：{}", e);
         }
         userMapper.insert(user);
-
-        Long id = user.getId();
-        String[] roles = userVo.getRoleIds().split(",");
-        UserRole userRole = new UserRole();
-
-        for (String string : roles) {
-            userRole.setUserId(id);
-            userRole.setRoleId(Long.valueOf(string));
-            userRoleMapper.insert(userRole);
-        }
     }
 
     @Override
@@ -83,33 +67,16 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("类型转换异常：{}", e);
         }
         userMapper.updateUser(user);
-        Long id = userVo.getId();
-        List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
-        if (userRoles != null && (!userRoles.isEmpty())) {
-            for (UserRole userRole : userRoles) {
-                userRoleMapper.deleteById(userRole.getId());
-            }
-        }
-
-        String[] roles = userVo.getRoleIds().split(",");
-        UserRole userRole = new UserRole();
-        for (String string : roles) {
-            userRole.setUserId(id);
-            userRole.setRoleId(Long.valueOf(string));
-            userRoleMapper.insert(userRole);
-        }
-
     }
 
     @Override
     public void deleteUserById(Long id) {
         userMapper.deleteById(id);
-        List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
-        if (userRoles != null && (!userRoles.isEmpty())) {
-            for (UserRole userRole : userRoles) {
-                userRoleMapper.deleteById(userRole.getId());
-            }
-        }
+    }
+
+    @Override
+    public User findUserByLoginNameAndPwd(String username, String pwd) {
+        return userMapper.findUserByLoginNameAndPwd(username, pwd);
     }
 
 }

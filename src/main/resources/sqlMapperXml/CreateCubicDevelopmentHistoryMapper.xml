@@ -25,9 +25,6 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.king.model.CreateCubicDevelopmentHistory" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into t_create_cubic_development_history (year, month, event, 
       sort, imgUrl, createTime, 
       updateTime)
@@ -36,9 +33,7 @@
       #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.king.model.CreateCubicDevelopmentHistory" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
+
     insert into t_create_cubic_development_history
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="year != null" >

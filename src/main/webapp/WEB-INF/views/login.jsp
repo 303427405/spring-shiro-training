@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <%@ include file="/commons/basejs.jsp" %>
+    <%@ include file="/commons/common.jsp" %>
     <style>
         body {
             background: #ebebeb;
@@ -149,34 +150,27 @@
                 $("#right_hand").attr("class", "initial_right_hand");
                 $("#right_hand").attr("style", "right:-112px;top:-12px");
             });
-            // 登录
-            $('#loginform').form({
-                url:'${path }/login',
-                onSubmit : function() {
-                    progressLoad();
-                    var isValid = $(this).form('validate');
-                    if(!isValid){
-                        progressClose();
-                    }
-                    return isValid;
-                },
-                success:function(result){
-                    progressClose();
-                    result = $.parseJSON(result);
-                    if (result.success) {
-                        window.location.href='${path }/index';
-                    }else{
-                        $.messager.show({
-                            title:'提示',
-                            msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>'+result.msg+'</div></div>',
-                            showType:'show'
-                        });
-                    }
-                }
-            });
         });
         function submitForm(){
-            $('#loginform').submit();
+            $.ajax({
+                url:"${path}/loginPost",
+                data:{
+                    username:$("#username").val(),
+                    password:$("#password").val()
+                },
+                dataType:"JSON",
+                type:"POST",
+                success: function (result) {
+                    if(result.code == '0') {
+                        layer.msg(result.msg,{time:2000});
+                        setTimeout(function() {
+                            window.location.href ="${path}/index";
+                        }, 500)
+                    } else{
+                        layer.msg(result.msg,{time:2000});
+                    }
+                }
+            })
         }
         function clearForm(){
             $('#loginform').form('clear');
@@ -186,7 +180,7 @@
             if (event.keyCode == 13){
                 event.returnValue=false;
                 event.cancel = true;
-                $('#loginform').submit();
+                submitForm();
             }
         }
     </script>
@@ -194,7 +188,7 @@
 <body onkeydown="enterlogin();">
 <div class="top_div"></div>
 <div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
-    <form method="post" id="loginform">
+    <form method="post" id="loginform" action="${path}/loginPost">
         <div style="width: 165px; height: 96px; position: absolute;">
             <div class="tou"></div>
             <div class="initial_left_hand" id="left_hand"></div>
@@ -202,7 +196,7 @@
         </div>
         <P style="padding: 30px 0px 10px; position: relative;">
             <span class="u_logo"></span>
-            <input class="ipt" type="text" name="username" placeholder="请输入用户名或邮箱" value="" />
+            <input class="ipt" type="text" id="username" name="username" placeholder="请输入用户名或邮箱" value="" />
         </P>
         <P style="position: relative;">
             <span class="p_logo"></span>

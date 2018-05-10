@@ -13,103 +13,110 @@
     http://www.springframework.org/schema/tx 
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- 扫描service、dao -->
-    <context:component-scan base-package="com.king">
-        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+    <context:annotation-config />
+
+    <!-- 启动包扫描功能，以便注册带有@Controller、@Service、@repository、@Component等注解的类成为spring的bean -->
+    <context:component-scan base-package="com.king" />
+
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" />
 
     <!-- 配置连接池 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
-    <!-- 主库 -->
-    <bean name="master-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-          init-method="init" destroy-method="close">
-        <property name="url" value="${master_driverUrl}"/>
-        <property name="username" value="${master_username}"/>
-        <property name="password" value="${master_password}"/>
-        <property name="initialSize" value="5"/>
-        <property name="maxActive" value="100"/>
-        <property name="minIdle" value="10"/>
-        <property name="maxWait" value="60000"/>
-        <property name="validationQuery" value="SELECT 'x'"/>
-        <property name="testOnBorrow" value="true"/>
-        <property name="testOnReturn" value="true"/>
-        <property name="testWhileIdle" value="true"/>
-        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-        <property name="minEvictableIdleTimeMillis" value="300000"/>
-        <property name="removeAbandoned" value="true"/>
-        <property name="removeAbandonedTimeout" value="1800"/>
-        <property name="logAbandoned" value="true"/>
-        <property name="filters" value="mergeStat"/>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!-- 连接池最大连接数 -->
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+
+        <!-- 获取连接的最大等待时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 连接池最小空闲连接数 -->
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+
+        <!--
+            true:应用申请连接时,执行validationQuery配置的sql,确保连接的有效性
+        -->
+        <property name="testOnBorrow" value="false" />
+
+        <!-- 每次在返回连接的时候都要执行该sql,以确保与数据库连接的有效性
+            如果数据库重启，连接池会重新建立连接并返回给申请者。
+        -->
+        <property name="validationQuery" value="${validationQuery}" />
+
+        <!--
+            poolPreparedStatements：true:支持PSCache false:不支持PSCache
+            当配置>0时：poolPreparedStatements自动设置为true
+            PSCache对支持游标的数据库性能提升巨大
+            oracle和mysql5.5及以上版本支持PSCache
+        -->
+        <property name="maxOpenPreparedStatements" value="50" />
+
+        <!--
+            应用申请连接的时候
+            如果空闲时间大于timeBetweenEvictionRunsMillis
+            执行validationQuery验证连接是否有效
+        -->
+        <property name="testWhileIdle" value="true" />
+        <!--
+            1、每隔300000毫秒检测链接池的链接的空闲时间
+               如果空闲时间>minEvictableIdleTimeMillis则释放
+            2、testWhileIdle参数为true时 连接空闲>配置则检测连接
+        -->
+        <property name="timeBetweenEvictionRunsMillis" value="300000" />
+
+        <!-- 连接池空闲时间>该配置则关闭连接 默认:1800000L毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="60000"/>
+
+        <!-- 开启Druid的监控统计功能 -->
+        <property name="filters" value="stat" />
     </bean>
 
-    <!-- 从库 -->
-    <bean name="slave-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-          init-method="init" destroy-method="close">
-        <property name="url" value="${slave_driverUrl}"/>
-        <property name="username" value="${slave_username}"/>
-        <property name="password" value="${slave_password}"/>
-        <property name="initialSize" value="5"/>
-        <property name="maxActive" value="100"/>
-        <property name="minIdle" value="10"/>
-        <property name="maxWait" value="60000"/>
-        <property name="validationQuery" value="SELECT 'x'"/>
-        <property name="testOnBorrow" value="true"/>
-        <property name="testOnReturn" value="true"/>
-        <property name="testWhileIdle" value="true"/>
-        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
-        <property name="minEvictableIdleTimeMillis" value="300000"/>
-        <property name="removeAbandoned" value="true"/>
-        <property name="removeAbandonedTimeout" value="1800"/>
-        <property name="logAbandoned" value="true"/>
-        <property name="filters" value="mergeStat"/>
-    </bean>
-    <!--数据源切面注入spring-->
-
-    <bean id="dsChangeAspect" class="com.king.aop.DataSourceAspect"/>
-
-    <!--主从库选择-->
-    <bean id="dynamicDataSource" class="com.king.datasource.DynamicDataSource">
-        <property name="master" ref="master-dataSource"/>
-        <property name="slaves">
-            <list>
-                <ref bean="slave-dataSource"/>
-            </list>
-        </property>
-    </bean>
-
-    <!-- spring整合mybatis （mybatis-spring项目提供整合类） -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dynamicDataSource"></property>
-        <property name="configLocation" value="classpath:sqlMapConfig.xml"></property>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
+        <property name="mapperLocations" value="classpath*:sqlMapperXml/*.xml" />
     </bean>
 
-    <!-- MyBatis 动态实现  -->
-    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 对Dao 接口动态实现，需要知道接口在哪  -->
-        <property name="basePackage" value="com.king.mapper"/>
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
 
-    <!-- 事务管理 -->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dynamicDataSource"></property>
+    <!--
+		自动生成接口实现bean,
+		bean的名称默认为首字母小写的接口类名,
+		也可通过在接口类上用@Component注解指定
+	-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.king.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 
-    <!-- 事务管理 属性 -->
-    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+    <!-- 事物配置 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" >
+        <property name="dataSource" ref="dataSource" ></property>
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="insert*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="edit*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="edit*"	propagation="REQUIRED" />
+            <tx:method name="upd*"	propagation="REQUIRED" />
+            <tx:method name="set*"	propagation="REQUIRED" />
+            <tx:method name="find*" propagation="NOT_SUPPORTED" />
+            <tx:method name="get*"  propagation="NOT_SUPPORTED"/>
+            <tx:method name="*"	propagation="REQUIRED" />
         </tx:attributes>
     </tx:advice>
 
-    <!-- 配置切面 -->
     <aop:config>
-        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.king.service..*.*(..))"/>
+        <aop:pointcut id="daoMethods" expression="execution(* com.king.service.impl.*.*(..))" />
+        <aop:advisor order="0" advice-ref="txAdvice" pointcut-ref="daoMethods" />
     </aop:config>
+
 </beans>

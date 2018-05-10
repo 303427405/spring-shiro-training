@@ -45,4 +45,9 @@ public class ContactUsServiceImpl implements ContactUsService {
         return createCubicContactUsMapper.select(type);
     }
 
+    @Override
+    public CreateCubicContactUs findById(Integer id) {
+        return createCubicContactUsMapper.selectByPrimaryKey(id);
+    }
+
 }

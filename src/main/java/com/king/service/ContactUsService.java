@@ -22,4 +22,6 @@ public interface ContactUsService {
      */
     List<CreateCubicContactUs> list(Integer type);
 
+    CreateCubicContactUs findById(Integer id);
+
 }

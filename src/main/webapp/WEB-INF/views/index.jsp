@@ -3,143 +3,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/commons/basejs.jsp" %>
+<%@ include file="/commons/common.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主页</title>
-<script type="text/javascript">
-    var index_layout;
-    var index_tabs;
-    var index_tabsMenu;
-    var layout_west_tree;
 
-    $(function() {
-        index_layout = $('#index_layout').layout({
-            fit : true
-        });
-
-        index_tabs = $('#index_tabs').tabs({
-            fit : true,
-            border : false,
-            tools : [{
-                iconCls : 'icon-home',
-                handler : function() {
-                    index_tabs.tabs('select', 0);
-                }
-            }, {
-                iconCls : 'icon-refresh',
-                handler : function() {
-                    var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
-                    index_tabs.tabs('getTab', index).panel('open').panel('refresh');
-                }
-            }, {
-                iconCls : 'icon-del',
-                handler : function() {
-                    var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
-                    var tab = index_tabs.tabs('getTab', index);
-                    if (tab.panel('options').closable) {
-                        index_tabs.tabs('close', index);
-                    }
-                }
-            } ]
-        });
-
-        layout_west_tree = $('#layout_west_tree').tree({
-            url : '${path }/resource/tree',
-            parentField : 'pid',
-            lines : true,
-            onClick : function(node) {
-                if (node.attributes.indexOf("http") >= 0) {
-                    var url = node.attributes;
-                    addTab({
-                        url : url,
-                        title : node.text,
-                        iconCls : node.iconCls
-                    });
-                } else if (node.attributes) {
-                    var url = '${path }' + node.attributes;
-                    addTab({
-                        url : url,
-                        title : node.text,
-                        iconCls : node.iconCls
-                    });
-                }
-            }
-        });
-    });
-
-    function addTab(params) {
-        var iframe = '<iframe src="' + params.url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
-        var t = $('#index_tabs');
-        var opts = {
-            title : params.title,
-            closable : true,
-            iconCls : params.iconCls,
-            content : iframe,
-            border : false,
-            fit : true
-        };
-        if (t.tabs('exists', opts.title)) {
-            t.tabs('select', opts.title);
-        } else {
-            t.tabs('add', opts);
-        }
-    }
-
-    function logout(){
-        $.messager.confirm('提示','确定要退出?',function(r){
-            if (r){
-                progressLoad();
-                $.post('${path }/logout', function(result) {
-                    if(result.success){
-                        progressClose();
-                        window.location.href='${path }';
-                    }
-                }, 'json');
-            }
-        });
-    }
-
-    function editUserPwd() {
-        parent.$.modalDialog({
-            title : '修改密码',
-            width : 300,
-            height : 250,
-            href : '${path }/user/editPwdPage',
-            buttons : [ {
-                text : '确定',
-                handler : function() {
-                    var f = parent.$.modalDialog.handler.find('#editUserPwdForm');
-                    f.submit();
-                }
-            } ]
-        });
-    }
-
-</script>
 </head>
 <body>
-    <div id="loading" style="position: fixed;top: -50%;left: -50%;width: 200%;height: 200%;background: #fff;z-index: 100;overflow: hidden;">
-        <img src="${staticPath }/static/style/images/ajax-loader.gif" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;"/>
-    </div>
-    <div id="index_layout">
-        <div data-options="region:'north',border:false" style=" overflow: hidden; ">
-            <div>
-                <span style="float: right; padding-right: 20px; margin-top: 15px; color: #333">欢迎 <b><shiro:principal></shiro:principal></b>&nbsp;&nbsp; <shiro:hasPermission name="/user/editPwdPage"><a href="javascript:void(0)" onclick="editUserPwd()" class="easyui-linkbutton" plain="true" icon="icon-edit" >修改密码</a></shiro:hasPermission>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="logout()" class="easyui-linkbutton" plain="true" icon="icon-clear">安全退出</a></span>
-                <span class="header"></span>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">创立方后台管理系统</div>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="/resources/images/logo.png" class="layui-nav-img">
+                        ${user.userName}
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;" onclick="edit(${11111})">修改密码</a></dd>
+                        <dd><a href="javascript:;" onclick="loginOut()">注销</a></dd>
+                    </dl>
+                </li>
+                <%--<li class="layui-nav-item"><a href="">退了</a></li>--%>
+            </ul>
+        </div>
+
+
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;">创立方后台</a>
+                        <dl class="layui-nav-child menu">
+                            <dd><a href="javascript:;" data-href="${staticPath}/contactUs/list">联系我们</a></dd>
+                            <dd><a href="javascript:;">列表二</a></dd>
+                            <dd><a href="javascript:;">列表三</a></dd>
+                            <dd><a href="">超链接</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">解决方案</a>
+                        <dl class="layui-nav-child menu">
+                            <dd><a href="javascript:;">列表一</a></dd>
+                            <dd><a href="javascript:;">列表二</a></dd>
+                            <dd><a href="">超链接</a></dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item"><a href="">云市场</a></li>
+                    <li class="layui-nav-item"><a href="">发布商品</a></li>
+                </ul>
             </div>
         </div>
-        <div data-options="region:'west',split:true" title="菜单" style="width: 160px; overflow: hidden;overflow-y:auto; padding:0px">
-            <div class="well well-small" style="padding: 5px 5px 5px 5px;">
-                <ul id="layout_west_tree"></ul>
-            </div>
+        <div class="layui-body">
+            <iframe width="100%" height="100%" src="" id="main_iframe"></iframe>
         </div>
-        <div data-options="region:'center'" style="overflow: hidden;">
-            <div id="index_tabs" style="overflow: hidden;">
-                <div title="首页" data-options="border:false" style="overflow: hidden;">
-                </div>
-            </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © layui.com - 底部固定区域
         </div>
-        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2015 power by <a href="http://www.dreamlu.net/" target="_blank">如梦技术</a></div>
     </div>
 
     <!--[if lte IE 7]>
@@ -153,4 +76,57 @@
         #ie6-warning p{width:960px;margin:0 auto;}
     </style>
 </body>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+    $(".menu dd a").bind("click",function () {
+        window.document.getElementById("main_iframe").src=$(this).attr("data-href");
+    });
+
+    //修改密码
+    function edit(id) {
+        $(".popup").show();
+        layer.open({
+            shade:0,
+            title:'修改密码',
+            type: 2,
+            area: ['500px', '330px'],
+            content:  window.basePath+"/toEditPwd?id="+id,
+            end: function () {
+                $(".popup").hide();
+            }
+        });
+    }
+    //注销
+    function loginOut() {
+        $(".popup").show();
+        layer.confirm('确认退出登录吗？', {
+            shade: 0,
+            area : ['auto','auto'],
+            btn: ['确定','取消'] //按钮
+        }, function(){
+            $.ajax({
+                url: window.basePath+"/loginOut",
+                data:{},
+                dataType:"JSON",
+                type:"POST",
+                success: function (d) {
+                    if(d.code == '000000') {
+                        layer.msg(d.msg, {time:2000});
+                        setTimeout(function() {
+                            window.location.href = window.basePath+"/login";
+                        }, 500)
+                    } else{
+                        layer.msg(d.msg, {time:2000});
+                    }
+                }
+            });
+        }, function(){
+            $(".popup").hide();
+            layer.close();
+        });
+    }
+</script>
+
 </html>

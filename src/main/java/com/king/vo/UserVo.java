@@ -1,7 +1,6 @@
 package com.king.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.king.model.Role;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,8 +32,6 @@ public class UserVo implements Serializable {
     private Date createdate;
 
     private String phone;
-
-    private List<Role> rolesList;
 
     private String organizationName;
 
@@ -131,14 +128,6 @@ public class UserVo implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
-    }
-
-    public List<Role> getRolesList() {
-        return rolesList;
-    }
-
-    public void setRolesList(List<Role> rolesList) {
-        this.rolesList = rolesList;
     }
 
     public String getOrganizationName() {

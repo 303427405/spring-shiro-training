@@ -1,12 +1,11 @@
 package com.king.controller;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.king.code.Result;
-import com.king.model.Role;
 import com.king.model.User;
 import com.king.service.UserService;
 import com.king.utils.PageInfo;
+import com.king.utils.SessionUtil;
 import com.king.vo.UserVo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -14,13 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -123,18 +120,18 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping("/editPage")
-    public String editPage(Long id, Model model) {
-        UserVo userVo = userService.findUserVoById(id);
-        List<Role> rolesList = userVo.getRolesList();
-        List<Long> ids = Lists.newArrayList();
-        for (Role role : rolesList) {
-            ids.add(role.getId());
-        }
-        model.addAttribute("roleIds", ids);
-        model.addAttribute("user", userVo);
-        return "/admin/userEdit";
-    }
+//    @RequestMapping("/editPage")
+//    public String editPage(Long id, Model model) {
+//        UserVo userVo = userService.findUserVoById(id);
+//        List<Role> rolesList = userVo.getRolesList();
+//        List<Long> ids = Lists.newArrayList();
+//        for (Role role : rolesList) {
+//            ids.add(role.getId());
+//        }
+//        model.addAttribute("roleIds", ids);
+//        model.addAttribute("user", userVo);
+//        return "/admin/userEdit";
+//    }
 
     /**
      * 编辑用户
@@ -186,13 +183,13 @@ public class UserController extends BaseController {
     @ResponseBody
     public Result editUserPwd(HttpServletRequest request, String oldPwd, String pwd) {
         Result result = new Result();
-        if (!getCurrentUser().getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
+        if (!SessionUtil.getSessionUser(request).getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
             result.setMsg("老密码不正确!");
             return result;
         }
 
         try {
-            userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
+            userService.updateUserPwdById(SessionUtil.getSessionUser(request).getId(), DigestUtils.md5Hex(pwd));
             result.setSuccess(true);
             result.setMsg("密码修改成功！");
             return result;

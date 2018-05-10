@@ -79,4 +79,12 @@ public interface UserMapper {
      * @return
      */
     UserVo findUserVoById(Long id);
+
+    /**
+     * 根据用户名查询用户
+     *
+     * @param username
+     * @return
+     */
+    User findUserByLoginNameAndPwd(@Param("username") String username,@Param("pwd") String pwd);
 }

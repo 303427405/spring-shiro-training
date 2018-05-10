@@ -25,9 +25,6 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.king.model.CreateCubicSpacePlan" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into t_create_cubic_space_plan (title, desc, imgUrl, 
       mostFit, unitPrice, createTime, 
       updateTime)
@@ -36,9 +33,6 @@
       #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.king.model.CreateCubicSpacePlan" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into t_create_cubic_space_plan
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="title != null" >

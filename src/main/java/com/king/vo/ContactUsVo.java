@@ -6,6 +6,8 @@ import java.util.Date;
 public class ContactUsVo implements Serializable {
     private Integer id;
 
+    private String subTitle;
+
     private String content;
 
     private String imgurl;
@@ -44,6 +46,14 @@ public class ContactUsVo implements Serializable {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     @Override

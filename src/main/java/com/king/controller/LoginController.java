@@ -1,21 +1,23 @@
 package com.king.controller;
 
 import com.king.code.Result;
+import com.king.common.Constant;
+import com.king.enums.RespCode;
+import com.king.model.User;
+import com.king.service.UserService;
+import com.king.utils.SessionUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.DisabledAccountException;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,6 +29,9 @@ public class LoginController {
 
     private static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
+    @Autowired
+    private UserService userService;
+
     /**
      * 首页
      *
@@ -34,7 +39,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/")
     public String index() {
-        return "redirect:/index";
+        return "redirect:/login";
     }
 
     /**
@@ -44,24 +49,19 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value = "/index")
-    public String index(Model model) {
+    public String index(HttpServletRequest request,Model model) {
+        if(SessionUtil.getSessionUser(request) == null){
+            return "/login";
+        }
         return "/index";
     }
 
     /**
      * GET 登录
-     *
-     * @param model
-     * @param request
-     * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, HttpServletRequest request) {
-        LOGGER.info("GET请求登录");
-        if (SecurityUtils.getSubject().isAuthenticated()) {
-            return "redirect:/index";
-        }
-        return "/login";
+    public ModelAndView login() {
+        return new ModelAndView("login",null);
     }
 
     /**
@@ -69,61 +69,32 @@ public class LoginController {
      *
      * @param username 用户名
      * @param password 密码
-     * @param request
-     * @param model
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
-    public Result loginPost(String username, String password, HttpServletRequest request, Model model) {
+    @RequestMapping(value = "/loginPost", method = RequestMethod.POST)
+    public ModelAndView loginPost(String username, String password) {
         LOGGER.info("POST请求登录");
-        Result result = new Result();
+        ModelMap model = new ModelMap();
         if (StringUtils.isBlank(username)) {
-            result.setMsg("用户名不能为空");
-            return result;
+            model.addAttribute(Constant.ResponseVO.CODE, RespCode.RESP_CODE_FAILER.getCode());
+            model.addAttribute(Constant.ResponseVO.MSG,  "用户名不能为空");
+            return new ModelAndView("jsonView", model);
         }
         if (StringUtils.isBlank(password)) {
-            result.setMsg("密码不能为空");
-            return result;
+            model.addAttribute(Constant.ResponseVO.CODE, RespCode.RESP_CODE_FAILER.getCode());
+            model.addAttribute(Constant.ResponseVO.MSG,  "密码不能为空");
+            return new ModelAndView("jsonView", model);
         }
-        Subject user = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
-        token.setRememberMe(true);
-        try {
-            user.login(token);
-        } catch (UnknownAccountException e) {
-            LOGGER.error("账号不存在：{}", e);
-            result.setMsg("账号不存在");
-            return result;
-        } catch (DisabledAccountException e) {
-            LOGGER.error("账号未启用：{}", e);
-            result.setMsg("账号未启用");
-            return result;
-        } catch (IncorrectCredentialsException e) {
-            LOGGER.error("密码错误：{}", e);
-            result.setMsg("密码错误");
-            return result;
-        } catch (RuntimeException e) {
-            LOGGER.error("未知错误,请联系管理员：{}", e);
-            result.setMsg("未知错误,请联系管理员");
-            return result;
+        User user = userService.findUserByLoginNameAndPwd(username,DigestUtils.md5Hex(password));
+        if (user == null){
+            model.addAttribute(Constant.ResponseVO.CODE, RespCode.RESP_CODE_FAILER.getCode());
+            model.addAttribute(Constant.ResponseVO.MSG,  "用户名或密码错误");
+            return new ModelAndView("jsonView", model);
         }
-        result.setSuccess(true);
-        return result;
-    }
-
-    /**
-     * 未授权
-     *
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = "/unauth")
-    public String unauth(Model model) {
-        if (SecurityUtils.getSubject().isAuthenticated() == false) {
-            return "redirect:/login";
-        }
-        return "/unauth";
+        SessionUtil.setSessionUser(user);
+        model.addAttribute(Constant.ResponseVO.CODE, RespCode.RESP_CODE_SUCCESS.getCode());
+        model.addAttribute(Constant.ResponseVO.MSG,  "登陆成功");
+        return new ModelAndView("jsonView", model);
     }
 
     /**
@@ -136,9 +107,8 @@ public class LoginController {
     @ResponseBody
     public Result logout(HttpServletRequest request) {
         LOGGER.info("登出");
-        Subject subject = SecurityUtils.getSubject();
+        SessionUtil.clearSession();
         Result result = new Result();
-        subject.logout();
         result.setSuccess(true);
         return result;
     }

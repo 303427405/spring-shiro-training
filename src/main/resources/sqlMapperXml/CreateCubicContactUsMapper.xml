@@ -23,18 +23,12 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.king.model.CreateCubicContactUs" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into t_create_cubic_contact_us (content, imgUrl, type, 
       createTime, updateTime)
     values (#{content,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
       #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.king.model.CreateCubicContactUs" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
     insert into t_create_cubic_contact_us
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="content != null" >
