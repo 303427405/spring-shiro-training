@@ -45,15 +45,17 @@ public class LoginController {
     /**
      * 首页
      *
-     * @param model
+     *
      * @return
      */
     @RequestMapping(value = "/index")
-    public String index(HttpServletRequest request,Model model) {
+    public ModelAndView index(HttpServletRequest request) {
+        ModelMap model = new ModelMap();
         if(SessionUtil.getSessionUser(request) == null){
-            return "/login";
+            return new ModelAndView("/login",model);
         }
-        return "/index";
+        model.addAttribute("userName", SessionUtil.getSessionUser(request).getLoginname());
+        return new ModelAndView("/index",model);
     }
 
     /**

@@ -23,7 +23,7 @@ public class RecruitServiceImpl implements RecruitService {
     @Override
     public void save(CreateCubicRecruit createCubicRecruit) {
         try {
-            if (createCubicRecruit.getRecruitid() == 0){
+            if (createCubicRecruit.getRecruitid() == 0 || createCubicRecruit.getRecruitid() == null){
                 createCubicRecruit.setCreatetime(new Date());
                 createCubicRecruitMapper.insertSelective(createCubicRecruit);
             }else{
@@ -48,6 +48,11 @@ public class RecruitServiceImpl implements RecruitService {
         result.setSuccess(true);
         result.setMsg("删除成功");
         return result;
+    }
+
+    @Override
+    public CreateCubicRecruit findById(Integer id) {
+        return createCubicRecruitMapper.selectByPrimaryKey(id);
     }
 
 }

@@ -7,4 +7,5 @@
     <script type="text/javascript" src="${staticPath}/static/jquery-1.11.3.js" ></script>
     <script type="text/javascript" src="${staticPath}/static/layer/layer.js"></script>
     <script type="text/javascript" src="${staticPath}/static/layui/layui.js"></script>
+    <script type="text/javascript" src="${staticPath}/static/layui/layui.all.js"></script>
 

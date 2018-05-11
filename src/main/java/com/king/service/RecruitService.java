@@ -31,5 +31,7 @@ public interface RecruitService {
      */
     Result delete(Integer id);
 
+    CreateCubicRecruit findById(Integer id);
+
 
 }

@@ -5,7 +5,7 @@
 	<head>
 		<%@ include file="/commons/common.jsp" %>
 		<meta charset="utf-8">
-		<title>联系我们</title>
+		<title>人才理念</title>
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	</head>
@@ -14,43 +14,25 @@
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
 			<legend>
 				<c:if test="${info.id > 0}">修改</c:if>
-				<c:if test="${info.id == null}">添加</c:if>联系我们 </legend>
+				<c:if test="${info.id == null}">添加</c:if>人才理念 </legend>
 		</fieldset>
+
 		<form class="layui-form">
-			<div class="layui-form-item" style="margin: 5px;width: 400px;">
-				<label class="layui-form-label">副标题</label>
-				<div class="layui-input-block">
-					<input type="text" id="subtitle" name="subtitle" value="${info.subtitle}" autocomplete="off" placeholder="请输入标题" class="layui-input">
-				</div>
-			</div>
-			<div class="layui-form-item" style="margin: 5px;width: 400px;">
-				<label class="layui-form-label">位置</label>
-				<div class="layui-input-block">
-					<select name="type" id="type">
-						<option value="0" <c:if test="${info.type==0}">selected="selected"</c:if>>请选择</option>
-						<option value="1" <c:if test="${info.type==1}">selected="selected"</c:if>>顶部</option>
-						<option value="2" <c:if test="${info.type==2}">selected="selected"</c:if>>产业资源</option>
-						<option value="3" <c:if test="${info.type==3}">selected="selected"</c:if>>合作业务</option>
-					</select>
-				</div>
-			</div>
 
 			<div class="layui-form-item" style="margin: 5px;width: 400px;">
-				<label class="layui-form-label">上传图片</label>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">工作内容</label>
+					<div class="layui-input-block">
+						<textarea id="content" name="content" class="layui-textarea"  lay-verify="required" placeholder="请输入" autocomplete="off">${info.content}</textarea>
+					</div>
+				</div>
+			</div>
+			<div class="layui-form-item" style="margin: 5px;width: 400px;">
+				<label class="layui-form-label">图片</label>
 				<input type="file" name="logoFile" id="logoFile" onchange="setImg(this);">
 				<input type="hidden" name="imgurl" id="imgurl" value="${info.imgurl}">
 				<img src="${info.imgurl}" style="margin-top: 10px;" name="thumburlShow" id="thumburlShow"  alt="">
 			</div>
-
-			<div class="layui-form-item" style="margin: 5px;width: 400px;">
-				<div class="layui-form-item layui-form-text">
-					<label class="layui-form-label">内容</label>
-					<div class="layui-input-block">
-						<textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea">${info.content}</textarea>
-					</div>
-				</div>
-			</div>
-
 			<div class="layui-form-item">
 				<div class="layui-input-block">
 					<button class="layui-btn" lay-submit lay-filter="*" id="submit">立即提交</button>
@@ -59,7 +41,6 @@
 			</div>
 			<input type="hidden" id="id" name="id" value="${id}">
 		</form>
-
 	</div>
 	</body>
 <script>
@@ -68,33 +49,21 @@
         form.render();
         form.on('submit(*)', function(){
             var id = $("#id").val();
-            var subtitle = $("#subtitle").val();
-            var type = $("#type").val();
-            var imgurl = $("#imgurl").val();
             var content = $("#content").val();
-            if (type == 0){
-                layer.msg("请选择类型",{time:2000});
-                return false;
-            }
-            if(type==2 && content==''){  //产业资源
-                layer.msg("副标题不能为空",{time:2000});
-                return false;
-            }
+            var imgurl = $("#imgurl").val();
             $.ajax({
-                url:"${staticPath}/contactUs/save",
+                url:"${staticPath}/talentIdea/save",
                 data:{
                     id:id,
-                    subtitle:subtitle,
-                    type:type,
-                    imgurl:imgurl,
-                    content:content
+                    content:content,
+                    imgurl:imgurl
                 },
                 dataType:"JSON",
                 type:"POST",
                 success: function (data) {
                     if(data.code == '0') {
                         layer.msg(data.msg,{time:2000});
-                        window.location.href ="${staticPath}/contactUs/list";
+                        window.location.href ="${staticPath}/talentIdea/list";
                     } else{
                         layer.msg(data.msg,{time:2000});
                         return false;
@@ -148,7 +117,7 @@
     }
 
     $("#back").click(function () {
-        window.location.href ="${staticPath}/contactUs/list";
+        window.location.href ="${staticPath}/talentIdea/list";
     })
 </script>
 </html>

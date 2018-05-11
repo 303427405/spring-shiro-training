@@ -4,6 +4,7 @@ import com.king.model.CreateCubicContactUs;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CreateCubicContactUsMapper {
     int deleteByPrimaryKey(Integer id);
@@ -18,5 +19,7 @@ public interface CreateCubicContactUsMapper {
 
     int updateByPrimaryKey(CreateCubicContactUs record);
 
-    List<CreateCubicContactUs> select(@Param("type") Integer type);
+    List<CreateCubicContactUs> select();
+
+   int selectCountByType(Integer type);
 }

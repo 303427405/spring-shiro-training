@@ -6,7 +6,7 @@ import java.util.Date;
 public class ContactUsVo implements Serializable {
     private Integer id;
 
-    private String subTitle;
+    private String subtitle;
 
     private String content;
 
@@ -48,12 +48,12 @@ public class ContactUsVo implements Serializable {
         this.type = type;
     }
 
-    public String getSubTitle() {
-        return subTitle;
+    public String getSubtitle() {
+        return subtitle;
     }
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     @Override

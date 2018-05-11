@@ -5,7 +5,7 @@
 	<head>
 		<%@ include file="/commons/common.jsp" %>
 		<meta charset="utf-8">
-		<title>联系我们</title>
+		<title>招聘模块</title>
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	</head>
@@ -13,30 +13,20 @@
 	<div class="layui-form" style="border: 1px solid #e6e6e6;margin: 20px 50px 50px 50px;">
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
 			<legend>
-				<c:if test="${info.id > 0}">修改</c:if>
-				<c:if test="${info.id == null}">添加</c:if>联系我们 </legend>
+				<c:if test="${info.recruitid > 0}">修改</c:if>
+				<c:if test="${info.recruitid == 0}">添加</c:if>招聘模块 </legend>
 		</fieldset>
+
 		<form class="layui-form">
 			<div class="layui-form-item" style="margin: 5px;width: 400px;">
-				<label class="layui-form-label">副标题</label>
+				<label class="layui-form-label">岗位</label>
 				<div class="layui-input-block">
-					<input type="text" id="subtitle" name="subtitle" value="${info.subtitle}" autocomplete="off" placeholder="请输入标题" class="layui-input">
-				</div>
-			</div>
-			<div class="layui-form-item" style="margin: 5px;width: 400px;">
-				<label class="layui-form-label">位置</label>
-				<div class="layui-input-block">
-					<select name="type" id="type">
-						<option value="0" <c:if test="${info.type==0}">selected="selected"</c:if>>请选择</option>
-						<option value="1" <c:if test="${info.type==1}">selected="selected"</c:if>>顶部</option>
-						<option value="2" <c:if test="${info.type==2}">selected="selected"</c:if>>产业资源</option>
-						<option value="3" <c:if test="${info.type==3}">selected="selected"</c:if>>合作业务</option>
-					</select>
+					<input type="text" id="job" name="job" value="${info.job}" class="layui-input" lay-verify="required" placeholder="请输入" autocomplete="off" >
 				</div>
 			</div>
 
 			<div class="layui-form-item" style="margin: 5px;width: 400px;">
-				<label class="layui-form-label">上传图片</label>
+				<label class="layui-form-label">岗位图片</label>
 				<input type="file" name="logoFile" id="logoFile" onchange="setImg(this);">
 				<input type="hidden" name="imgurl" id="imgurl" value="${info.imgurl}">
 				<img src="${info.imgurl}" style="margin-top: 10px;" name="thumburlShow" id="thumburlShow"  alt="">
@@ -44,9 +34,18 @@
 
 			<div class="layui-form-item" style="margin: 5px;width: 400px;">
 				<div class="layui-form-item layui-form-text">
-					<label class="layui-form-label">内容</label>
+					<label class="layui-form-label">岗位要求</label>
 					<div class="layui-input-block">
-						<textarea placeholder="请输入内容" id="content" name="content" class="layui-textarea">${info.content}</textarea>
+						<textarea id="jobrequire" name="jobrequire" class="layui-textarea"  lay-verify="required" placeholder="请输入" autocomplete="off">${info.jobrequire}</textarea>
+					</div>
+				</div>
+			</div>
+
+			<div class="layui-form-item" style="margin: 5px;width: 400px;">
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">工作内容</label>
+					<div class="layui-input-block">
+						<textarea id="contentdesc" name="contentdesc" class="layui-textarea"  lay-verify="required" placeholder="请输入" autocomplete="off">${info.contentdesc}</textarea>
 					</div>
 				</div>
 			</div>
@@ -57,9 +56,8 @@
 					<button type="reset" class="layui-btn layui-btn-primary" id="back">返回</button>
 				</div>
 			</div>
-			<input type="hidden" id="id" name="id" value="${id}">
+			<input type="hidden" id="recruitId" name="recruitId" value="${recruitId}">
 		</form>
-
 	</div>
 	</body>
 <script>
@@ -67,40 +65,36 @@
         var form = layui.form;
         form.render();
         form.on('submit(*)', function(){
-            var id = $("#id").val();
-            var subtitle = $("#subtitle").val();
-            var type = $("#type").val();
+            var recruitId = $("#recruitId").val();
+            var job = $("#job").val();
             var imgurl = $("#imgurl").val();
-            var content = $("#content").val();
-            if (type == 0){
-                layer.msg("请选择类型",{time:2000});
+            var jobrequire = $("#jobrequire").val();
+            var contentdesc = $("#contentdesc").val();
+            if(imgurl == ''){
+                layer.msg("请上传图片!",{time:2000});
                 return false;
-            }
-            if(type==2 && content==''){  //产业资源
-                layer.msg("副标题不能为空",{time:2000});
-                return false;
-            }
+			}
             $.ajax({
-                url:"${staticPath}/contactUs/save",
+                url:"${staticPath}/recruit/save",
                 data:{
-                    id:id,
-                    subtitle:subtitle,
-                    type:type,
+                    recruitid:recruitId,
+                    job:job,
                     imgurl:imgurl,
-                    content:content
+                    jobrequire:jobrequire,
+                    contentdesc:contentdesc
                 },
                 dataType:"JSON",
                 type:"POST",
                 success: function (data) {
                     if(data.code == '0') {
                         layer.msg(data.msg,{time:2000});
-                        window.location.href ="${staticPath}/contactUs/list";
+                        setTimeout(window.location.href ="${staticPath}/recruit/list", 3000 );
                     } else{
                         layer.msg(data.msg,{time:2000});
                         return false;
                     }
                 }
-            })
+            });
 			return false;
         });
     });
@@ -146,9 +140,8 @@
             }
         });
     }
-
     $("#back").click(function () {
-        window.location.href ="${staticPath}/contactUs/list";
+        window.location.href ="${staticPath}/recruit/list"
     })
 </script>
 </html>

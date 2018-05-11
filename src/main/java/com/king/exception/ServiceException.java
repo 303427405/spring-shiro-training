@@ -5,6 +5,8 @@
  *******************************************************************************/
 package com.king.exception;
 
+import com.king.enums.RespCode;
+
 /**
  * Service层公用的Exception.
  * <p/>
@@ -14,21 +16,41 @@ package com.king.exception;
  */
 public class ServiceException extends RuntimeException {
 
-    private static final long serialVersionUID = 1401593546385403720L;
+    private static final long serialVersionUID = 8087751174148354521L;
+    /**
+     * 响应码
+     */
+    protected RespCode errorCode;
+    /**
+     * 响应描述
+     */
+    protected String errorMsg;
 
     public ServiceException() {
         super();
     }
 
-    public ServiceException(String message) {
-        super(message);
-    }
-
-    public ServiceException(Throwable cause) {
-        super(cause);
-    }
-
     public ServiceException(String message, Throwable cause) {
         super(message, cause);
+    }
+
+    public ServiceException(RespCode errorCode) {
+        this.errorCode = errorCode;
+    }
+    public ServiceException(String message) {
+        this.errorMsg = message;
+    }
+
+    public ServiceException(RespCode errorCode , String errorMsg) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
+    public RespCode getErrorCode() {
+        return errorCode;
+    }
+
+    public String getErrorMsg() {
+        return errorMsg;
     }
 }

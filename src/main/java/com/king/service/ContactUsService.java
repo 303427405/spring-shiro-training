@@ -20,7 +20,7 @@ public interface ContactUsService {
      * @author leige
      * @Date 2018年4月11日10:16:50
      */
-    List<CreateCubicContactUs> list(Integer type);
+    List<CreateCubicContactUs> list();
 
     CreateCubicContactUs findById(Integer id);
 

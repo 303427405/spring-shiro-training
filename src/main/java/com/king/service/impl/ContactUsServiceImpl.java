@@ -1,12 +1,12 @@
 package com.king.service.impl;
 
+import com.king.enums.RespCode;
+import com.king.exception.ServiceException;
 import com.king.mapper.CreateCubicContactUsMapper;
 import com.king.model.CreateCubicContactUs;
 import com.king.service.ContactUsService;
 import com.king.vo.ContactUsVo;
-import org.apache.commons.beanutils.PropertyUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,33 +16,29 @@ import java.util.List;
 @Service
 public class ContactUsServiceImpl implements ContactUsService {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(ContactUsServiceImpl.class);
-
     @Autowired
     private CreateCubicContactUsMapper createCubicContactUsMapper;
 
     @Override
     public void save(ContactUsVo cubicContactUsVo) {
+        //判断条数是否大于1 只能添加一条数据
+        if(cubicContactUsVo.getId() ==0 && createCubicContactUsMapper.selectCountByType(cubicContactUsVo.getType()) >= 1){
+            throw new ServiceException(RespCode.ONE_COUNT_TYPE_ERROR, RespCode.ONE_COUNT_TYPE_ERROR.getDesc());
+        }
         CreateCubicContactUs idea = new CreateCubicContactUs();
-        try {
-            PropertyUtils.copyProperties(idea, cubicContactUsVo);
-            if (cubicContactUsVo.getId() == 0){
-                //判断条数是否大于1 只能添加一条数据
-                idea.setCreatetime(new Date());
-                createCubicContactUsMapper.insertSelective(idea);
-            }else{
-                idea.setUpdatetime(new Date());
-                createCubicContactUsMapper.updateByPrimaryKeySelective(idea);
-            }
-        } catch (Exception e) {
-            LOGGER.error("编辑联系我们出错：{}", e);
-            throw new RuntimeException("编辑联系我们出错：{}", e);
+        BeanUtils.copyProperties(cubicContactUsVo,idea);
+        if (cubicContactUsVo.getId() == 0 || cubicContactUsVo.getId() == null){
+            idea.setCreatetime(new Date());
+            createCubicContactUsMapper.insertSelective(idea);
+        }else{
+            idea.setUpdatetime(new Date());
+            createCubicContactUsMapper.updateByPrimaryKeySelective(idea);
         }
     }
 
     @Override
-    public List<CreateCubicContactUs> list(Integer type) {
-        return createCubicContactUsMapper.select(type);
+    public List<CreateCubicContactUs> list() {
+        return createCubicContactUsMapper.select();
     }
 
     @Override

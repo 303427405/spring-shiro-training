@@ -6,7 +6,7 @@ import java.util.Date;
 public class CreateCubicContactUs implements Serializable {
     private Integer id;
 
-    private String subTitle;
+    private String subtitle;
 
     private String content;
 
@@ -68,12 +68,12 @@ public class CreateCubicContactUs implements Serializable {
         this.updatetime = updatetime;
     }
 
-    public String getSubTitle() {
-        return subTitle;
+    public String getSubtitle() {
+        return subtitle;
     }
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     @Override

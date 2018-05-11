@@ -15,8 +15,7 @@
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <img src="/resources/images/logo.png" class="layui-nav-img">
-                        ${user.userName}
+                        ${userName}
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" onclick="edit(${11111})">修改密码</a></dd>
@@ -37,21 +36,10 @@
                         <a class="" href="javascript:;">创立方后台</a>
                         <dl class="layui-nav-child menu">
                             <dd><a href="javascript:;" data-href="${staticPath}/contactUs/list">联系我们</a></dd>
-                            <dd><a href="javascript:;">列表二</a></dd>
-                            <dd><a href="javascript:;">列表三</a></dd>
-                            <dd><a href="">超链接</a></dd>
+                            <dd><a href="javascript:;" data-href="${staticPath}/talentIdea/list">人才理念</a></dd>
+                            <dd><a href="javascript:;" data-href="${staticPath}/recruit/list">招聘模块</a></dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">解决方案</a>
-                        <dl class="layui-nav-child menu">
-                            <dd><a href="javascript:;">列表一</a></dd>
-                            <dd><a href="javascript:;">列表二</a></dd>
-                            <dd><a href="">超链接</a></dd>
-                        </dl>
-                    </li>
-                    <li class="layui-nav-item"><a href="">云市场</a></li>
-                    <li class="layui-nav-item"><a href="">发布商品</a></li>
                 </ul>
             </div>
         </div>

@@ -18,48 +18,33 @@
 			<colgroup>
 				<col width="150">
 				<col width="150">
-				<col width="200">
-				<col width="200">
+				<col width="400">
+				<col width="400">
+				<col width="100">
 			</colgroup>
 			<thead>
 			<tr>
-				<th>人物</th>
-				<th>民族</th>
-				<th>出场时间</th>
-				<th>格言</th>
+				<th>位置</th>
+				<th>副标题</th>
+				<th>内容</th>
+				<th>图片url</th>
+				<th>操作</th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<td>贤心</td>
-				<td>汉族</td>
-				<td>1989-10-14</td>
-				<td>人生似修行</td>
-			</tr>
-			<tr>
-				<td>张爱玲</td>
-				<td>汉族</td>
-				<td>1920-09-30</td>
-				<td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-			</tr>
-			<tr>
-				<td>Helen Keller</td>
-				<td>拉丁美裔</td>
-				<td>1880-06-27</td>
-				<td> Life is either a daring adventure or nothing.</td>
-			</tr>
-			<tr>
-				<td>岳飞</td>
-				<td>汉族</td>
-				<td>1103-北宋崇宁二年</td>
-				<td>教科书再滥改，也抹不去“民族英雄”的事实</td>
-			</tr>
-			<tr>
-				<td>孟子</td>
-				<td>华夏族（汉族）</td>
-				<td>公元前-372年</td>
-				<td>猿强，则国强。国强，则猿更强！ </td>
-			</tr>
+				<c:forEach var="item" items="${list}" varStatus="ind">
+					<tr class="paramer">
+						<td>
+							<c:if test="${item.type=='1'}">顶部</c:if>
+							<c:if test="${item.type=='2'}">产业资源</c:if>
+							<c:if test="${item.type=='3'}">合作业务</c:if>
+						</td>
+						<td>${item.subTitle}</td>
+						<td>${item.content}</td>
+						<td><a target="_blank" href="${item.imgurl}">${item.imgurl}</a></td>
+						<td> <a class="layui-btn layui-btn-xs" href="${staticPath}/contactUs/toAdd?id=${item.id}">编辑</a></td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
@@ -68,6 +53,5 @@
 	$('#add').click(function () {
 		window.location.href = "${staticPath}/contactUs/toAdd?id=0";
     })
-
 </script>
 </html>

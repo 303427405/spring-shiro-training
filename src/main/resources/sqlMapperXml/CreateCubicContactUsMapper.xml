@@ -3,6 +3,7 @@
 <mapper namespace="com.king.mapper.CreateCubicContactUsMapper" >
   <resultMap id="BaseResultMap" type="com.king.model.CreateCubicContactUs" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="subTitle" property="subtitle" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="imgUrl" property="imgurl" jdbcType="VARCHAR" />
     <result column="type" property="type" jdbcType="INTEGER" />
@@ -10,7 +11,7 @@
     <result column="updateTime" property="updatetime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, content, imgUrl, type, createTime, updateTime
+    id, content,subTitle, imgUrl, type, createTime, updateTime
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -34,6 +35,9 @@
       <if test="content != null" >
         content,
       </if>
+      <if test="subtitle != null" >
+        subTitle,
+      </if>
       <if test="imgurl != null" >
         imgUrl,
       </if>
@@ -50,6 +54,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        #{subtitle,jdbcType=VARCHAR},
       </if>
       <if test="imgurl != null" >
         #{imgurl,jdbcType=VARCHAR},
@@ -70,6 +77,9 @@
     <set >
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null" >
+        subTitle = #{subtitle,jdbcType=VARCHAR},
       </if>
       <if test="imgurl != null" >
         imgUrl = #{imgurl,jdbcType=VARCHAR},
@@ -96,14 +106,14 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="select" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from t_create_cubic_contact_us
-    <where>
-      <if test="type !=null and type !=0">
-          and type=#{type,jdbcType=INTEGER}
-      </if>
-    </where>
   </select>
+
+  <select id="selectCountByType" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+    select count(1) from t_create_cubic_contact_us where type = #{type}
+  </select>
+
 </mapper>

@@ -22,4 +22,6 @@ public interface TalentIdeaService {
      */
     List<CreateCubicTalentIdea> list();
 
+    CreateCubicTalentIdea findById(Integer id);
+
 }
