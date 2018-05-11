@@ -7,7 +7,7 @@
 <generatorConfiguration>
     <!-- 配置文件 -->
     <properties resource="jdbc.properties"/>
-    <context id="shiroTables" targetRuntime="MyBatis3" defaultModelType="flat">
+    <context id="shiroTables" targetRuntime="MyBatis3">
 
         <!-- plugin -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
@@ -20,8 +20,8 @@
 
         <!-- 连接配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="${master_driverUrl}" userId="${master_username}"
-                        password="${master_password}">
+                        connectionURL="${jdbc.url}" userId="${jdbc.username}"
+                        password="${jdbc.password}">
         </jdbcConnection>
 
         <!-- javaModelGenerator是模型的生成信息，这里将指定这些Java model类的生成路径 -->
@@ -42,8 +42,7 @@
         </javaClientGenerator>
 
         <!-- oracle 使用 schema 对应 用户名称空间 mysql 使用 catalog 对应 数据库 -->
-        <table domainObjectName="CreateCubicContactUs" tableName="t_create_cubic_contact_us" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
-        <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        <table domainObjectName="test" tableName="test" enableCountByExample="false" enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false" enableSelectByExample="false">
         </table>
 
     </context>

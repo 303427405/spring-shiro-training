@@ -133,6 +133,7 @@
                     layer.msg("上传成功",{time:2000});
                     $("#imgurl").val(data.url);//将地址存储好
                     $("#thumburlShow").attr("src",data.url);//显示图片
+                    $("#thumburlShow").show();
                 }else{
                     layer.msg("上传失败",{time:2000});
                     $("#imgurl").val("");

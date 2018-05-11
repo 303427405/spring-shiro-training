@@ -2,6 +2,8 @@ package com.king.mapper;
 
 import com.king.model.CreateCubicDevelopmentHistory;
 
+import java.util.List;
+
 public interface CreateCubicDevelopmentHistoryMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface CreateCubicDevelopmentHistoryMapper {
     int updateByPrimaryKeySelective(CreateCubicDevelopmentHistory record);
 
     int updateByPrimaryKey(CreateCubicDevelopmentHistory record);
+
+    List<CreateCubicDevelopmentHistory> select();
 }

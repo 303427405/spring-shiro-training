@@ -50,40 +50,56 @@
 		<script>
 			var app=new Vue({
 				el:'#wrapper',
-				data:{
-					bannerImg:'./imgs/us-banner.jpg',
-					banSlogan:'资源共享 优势互补 合作共赢',
-					block1:{
-						title:'产业资源',
-						subtitle:'资源共享 优势互补 合作共赢',
-						c_html:'<p>一是以新兴产业为代表的互联网、物联网、人工智能、大数据、智能制造、基因工程等高端产业；</p><p>二是以文旅、教育、服务咨询为代表的高端软实力产业。</p>',
-						imgurl:'./imgs/500002558.jpg',
-					},
-					block2:{
-						title:'合作业务',
-						imgurl:'./imgs/500060201.jpg',
-					}
-				},
+                data:{
+                    bannerImg:'',
+                    banSlogan:'',
+                    block1:{
+                        title:'',
+                        subtitle:'',
+                        c_html:'',
+                        imgurl:'',
+                    },
+                    block2:{
+                        title:'',
+                        imgurl:'',
+                    }
+                },
 				created(){
 					this.initPageData();
 				},
 				methods:{
 					initPageData(){//请求页面资源
 						let self=this;
-						// $.ajax({
-						// 	type: "GET",
-						// 	url: "",
-						// 	data:{},
-						// 	dataType: "json",
-						// 	success: function(data){
-						// 	      self.bannerImg=data.xxx;
-						// 	}
-						// })
+						$.ajax({
+							type: "GET",
+							url: "/contactUs/jsonData",
+							data:{},
+							dataType: "json",
+							success: function(data){
+							    var list = data.list;
+							    for(var i = 0;i<list.length;i++){
+									if(list[i].type == 1){  //顶部
+                                        self.bannerImg = list[i].imgurl;
+                                        self.banSlogan = list[i].subtitle;
+									}
+                                    if(list[i].type == 2){  //产业资源
+                                        self.block1.title = "产业资源";
+                                        self.block1.subtitle = list[i].subtitle;
+                                        self.block1.c_html = list[i].content;
+                                        self.block1.imgurl = list[i].imgurl;
+                                    }
+                                    if(list[i].type == 3){  //合作业务
+                                        self.block2.title = "合作业务";
+                                        self.block2.imgurl= list[i].imgurl;
+                                    }
+								}
+
+							}
+						})
 					}
 				}
 			})
 		</script>
-
 		<p>hello word</p>
 	</body>
 </html>

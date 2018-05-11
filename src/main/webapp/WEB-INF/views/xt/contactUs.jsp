@@ -33,13 +33,13 @@
 			</thead>
 			<tbody>
 				<c:forEach var="item" items="${list}" varStatus="ind">
-					<tr class="paramer">
+					<tr>
 						<td>
 							<c:if test="${item.type=='1'}">顶部</c:if>
 							<c:if test="${item.type=='2'}">产业资源</c:if>
 							<c:if test="${item.type=='3'}">合作业务</c:if>
 						</td>
-						<td>${item.subTitle}</td>
+						<td>${item.subtitle}</td>
 						<td>${item.content}</td>
 						<td><a target="_blank" href="${item.imgurl}">${item.imgurl}</a></td>
 						<td> <a class="layui-btn layui-btn-xs" href="${staticPath}/contactUs/toAdd?id=${item.id}">编辑</a></td>
