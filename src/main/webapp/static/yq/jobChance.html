@@ -86,9 +86,9 @@
 					phone:'020-26584585',
 					email:'15485965475@163.com',
 					block1:{
-						title:'人才理念',
-						imgurl:'./imgs/index-06.jpg',
-						desc:'<p><strong>创立方 - 人才=认同（坚守）价值观 + 人品 + 能力</strong></p><p><strong>公平竞争 任人唯贤：</strong>鼓励人才公正、公平、平等竞争，任用有德有才之人；</p><p><strong>职适其能 人尽其才：</strong>人才有不同层次和类型，做到职能相称。既要避免大材小用，也要避免小材大用；</p><p><strong>敢用新人 善用新人：</strong>敢于善于任用资历相对较浅，但是有才能、有魄力、有创新意识的新员工及年轻人</p>'
+						title:'',
+						imgurl:'',
+						desc:''
 					},
 					block2:{
 						title:'招聘岗位',
@@ -126,15 +126,28 @@
 				methods:{
 					initPageData(){//请求页面资源
                         let self=this;
+                        $.ajax({
+                            type: "GET",
+                            url: "/talentIdea/jsonData",
+                            data:{},
+                            dataType: "json",
+                            success: function(data){
+                                var list =  data.list;
+                                self.block1.title = '人才理念';
+                                self.block1.imgurl = list[0].imgurl;
+                                self.block1.desc = list[0].content;
+                            }
+                        });
+
                         // $.ajax({
                         //     type: "GET",
                         //     url: "/talentIdea/jsonData",
                         //     data:{},
                         //     dataType: "json",
                         //     success: function(data){
-                        //         self.bannerImg = list[i].imgurl;
-                        //         self.banSlogan = list[i].subtitle;
-                        //
+                        //         self.block1.title = '人才理念';
+                        //         self.block1.imgurl = data.imgurl;
+                        //         self.block1.desc = data.content
                         //     }
                         // })
 					}
