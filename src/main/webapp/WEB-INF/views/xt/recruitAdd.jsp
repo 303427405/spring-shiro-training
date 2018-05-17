@@ -8,6 +8,10 @@
 		<title>招聘模块</title>
 		<meta name="renderer" content="webkit">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<script type="text/javascript" charset="utf-8" src="${staticPath}/static/ueditor/ueditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="${staticPath}/static/ueditor/ueditor.all.min.js"> </script>
+		<script type="text/javascript" charset="utf-8" src="${staticPath}/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+		<link rel="stylesheet" href="${staticPath}/static/ueditor/themes/default/css/ueditor.css">
 	</head>
 	<body>
 	<div class="layui-form" style="border: 1px solid #e6e6e6;margin: 20px 50px 50px 50px;">
@@ -36,7 +40,7 @@
 				<div class="layui-form-item layui-form-text">
 					<label class="layui-form-label">岗位要求</label>
 					<div class="layui-input-block">
-						<textarea id="jobrequire" name="jobrequire" class="layui-textarea"  lay-verify="required" placeholder="请输入" autocomplete="off">${info.jobrequire}</textarea>
+						<script type="text/plain" id="jobrequire" name="jobrequire" style="width:1000px;height:240px;float: left;">${info.jobrequire}</script>
 					</div>
 				</div>
 			</div>
@@ -45,7 +49,7 @@
 				<div class="layui-form-item layui-form-text">
 					<label class="layui-form-label">工作内容</label>
 					<div class="layui-input-block">
-						<textarea id="contentdesc" name="contentdesc" class="layui-textarea"  lay-verify="required" placeholder="请输入" autocomplete="off">${info.contentdesc}</textarea>
+						<script type="text/plain" id="contentdesc" name="contentdesc" style="width:1000px;height:240px;float: left;">${info.contentdesc}</script>
 					</div>
 				</div>
 			</div>
@@ -61,41 +65,53 @@
 	</div>
 	</body>
 <script>
-    layui.use('form', function(){
-        var form = layui.form;
-        form.render();
-        form.on('submit(*)', function(){
-            var recruitId = $("#recruitId").val();
-            var job = $("#job").val();
-            var imgurl = $("#imgurl").val();
-            var jobrequire = $("#jobrequire").val();
-            var contentdesc = $("#contentdesc").val();
-            if(imgurl == ''){
-                layer.msg("请上传图片!",{time:2000});
-                return false;
-			}
-            $.ajax({
-                url:"${staticPath}/recruit/save",
-                data:{
-                    recruitid:recruitId,
-                    job:job,
-                    imgurl:imgurl,
-                    jobrequire:jobrequire,
-                    contentdesc:contentdesc
-                },
-                dataType:"JSON",
-                type:"POST",
-                success: function (data) {
-                    if(data.code == '0') {
-                        layer.msg(data.msg,{time:2000});
-                        setTimeout(window.location.href ="${staticPath}/recruit/list", 3000 );
-                    } else{
-                        layer.msg(data.msg,{time:2000});
-                        return false;
-                    }
+    $(function(){
+        var ue = UE.getEditor('jobrequire');
+        var ue1 = UE.getEditor('contentdesc');
+        layui.use('form', function(){
+            var form = layui.form;
+            form.render();
+            form.on('submit(*)', function(){
+                var recruitId = $("#recruitId").val();
+                var job = $("#job").val();
+                var imgurl = $("#imgurl").val();
+                var jobrequire = ue.getContent();
+                var contentdesc = ue1.getContent();
+                if(imgurl == ''){
+                    layer.msg("请上传图片!",{time:2000});
+                    return false;
                 }
+                if($.trim(jobrequire) == ''){
+                    layer.msg("职位要求不能为空!",{time:2000});
+                    return false;
+                }
+                if($.trim(contentdesc) == ''){
+                    layer.msg("工作内容不能为空",{time:2000});
+                    return false;
+                }
+                $.ajax({
+                    url:"${staticPath}/recruit/save",
+                    data:{
+                        recruitid:recruitId,
+                        job:job,
+                        imgurl:imgurl,
+                        jobrequire:jobrequire,
+                        contentdesc:contentdesc
+                    },
+                    dataType:"JSON",
+                    type:"POST",
+                    success: function (data) {
+                        if(data.code == '0') {
+                            layer.msg(data.msg,{time:2000});
+                            setTimeout(window.location.href ="${staticPath}/recruit/list", 3000 );
+                        } else{
+                            layer.msg(data.msg,{time:2000});
+                            return false;
+                        }
+                    }
+                });
+                return false;
             });
-			return false;
         });
     });
 

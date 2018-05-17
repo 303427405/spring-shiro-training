@@ -1,5 +1,7 @@
 package com.king.model;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,7 +31,7 @@ public class CreateCubicContactUs implements Serializable {
     }
 
     public String getContent() {
-        return content;
+        return StringEscapeUtils.unescapeHtml3(content);
     }
 
     public void setContent(String content) {
