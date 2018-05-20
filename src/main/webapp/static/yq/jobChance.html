@@ -94,30 +94,6 @@
 						title:'招聘岗位',
 					},
 					postList:[
-					{
-						imgurl:'./imgs/icon-hand.png',
-						jobtitle:'招商专员',
-						demand_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>',
-						content_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>'
-					},
-					{
-						imgurl:'./imgs/icon-lightbulb.png',
-						jobtitle:'市场策划',
-						demand_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>',
-						content_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>'
-					},
-					{
-						imgurl:'./imgs/icon-connect.png',
-						jobtitle:'运营专员',
-						demand_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>',
-						content_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>'
-					},
-					{
-						imgurl:'./imgs/icon-per.png',
-						jobtitle:'文案专员',
-						demand_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>',
-						content_html:'<ol><li><p>对市场敏感，有较强的逻辑思维、数据分析能力；</p></li><li><p>善学习、分析、总结，积极上进，对生活有追求；</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li><li><p>会使用PS、CDR、AI等平面设计软件；</p></li><li><p>3D Studio Max和AutoCAD等设计软件。</p></li><li><p>懂网站运营或者有设计行业工作经验者优先。</p></li></ol>'
-					}
 					]
 				},
 				created(){
@@ -136,20 +112,20 @@
                                 self.block1.title = '人才理念';
                                 self.block1.imgurl = list[0].imgurl;
                                 self.block1.desc = list[0].content;
+                                var recruitList = data.recruitList;
+                                if (recruitList.length > 0){
+									for(var i=0;i<recruitList.length;i++){
+									    var obj = {};
+                                        obj.imgurl = recruitList[i].imgurl;
+                                        obj.jobtitle = recruitList[i].job;
+                                        obj.demand_html = recruitList[i].jobrequire;
+                                        obj.content_html = recruitList[i].contentdesc;
+                                        self.postList.push(obj);
+                                    }
+								}
                             }
                         });
 
-                        // $.ajax({
-                        //     type: "GET",
-                        //     url: "/talentIdea/jsonData",
-                        //     data:{},
-                        //     dataType: "json",
-                        //     success: function(data){
-                        //         self.block1.title = '人才理念';
-                        //         self.block1.imgurl = data.imgurl;
-                        //         self.block1.desc = data.content
-                        //     }
-                        // })
 					}
 				}
 			})

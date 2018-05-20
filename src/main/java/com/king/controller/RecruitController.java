@@ -64,14 +64,6 @@ public class RecruitController extends BaseController {
         return new ModelAndView("xt/recruitList",model);
     }
 
-    @RequestMapping(value = "/jsonData", method = RequestMethod.GET)
-    public ModelAndView jsonData() {
-        ModelMap model = new ModelMap();
-        model.addAttribute("list",recruitService.list());
-        return new ModelAndView("jsonView",model);
-    }
-
-
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public ModelAndView delete(Integer id) {
         recruitService.delete(id);
