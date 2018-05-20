@@ -2,6 +2,7 @@ package com.king.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class CreateCubicEnterpriseService implements Serializable {
     private Integer id;
@@ -19,6 +20,8 @@ public class CreateCubicEnterpriseService implements Serializable {
     private Date createtime;
 
     private Date updatetime;
+    
+    private List<Enterprise> enterprise;
 
     private static final long serialVersionUID = 1L;
 
@@ -85,8 +88,17 @@ public class CreateCubicEnterpriseService implements Serializable {
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
     }
+    
 
-    @Override
+    public List<Enterprise> getEnterprise() {
+		return enterprise;
+	}
+
+	public void setEnterprise(List<Enterprise> enterprise) {
+		this.enterprise = enterprise;
+	}
+
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
