@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.king.mapper.EnterPriseMapper">
+
+
+	<select id="getbyeid" resultType="com.king.model.Enterprise"
+		parameterType="java.lang.Integer">
+		SELECT * from enterprise where eid = #{eid} ORDER BY sort
+	</select>
+
+	<select id="getbyid" resultType="com.king.model.Enterprise"
+		parameterType="java.lang.Integer">
+		SELECT * from enterprise where id = #{id}
+	</select>
+
+	<delete id="del" parameterType="java.lang.Integer">
+		delete from enterprise
+		where id =
+		#{id}
+	</delete>
+
+<insert id="ins" parameterType="com.king.model.Enterprise">
+		insert into enterprise
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="key != null">
+				`key`,
+			</if>
+			<if test="value != null">
+				`value`,
+			</if>
+			<if test="eid != null">
+				`eid`,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="key != null">
+				#{key},
+			</if>
+			<if test="value != null">
+				#{value},
+			</if>
+			<if test="eid != null">
+				#{eid},
+			</if>
+		</trim>
+	</insert>
+	<update id="upd" parameterType="com.king.model.Enterprise">
+		update t_create_cubic_enterprise_service
+		<set>
+			<if test="key != null">
+				`key` = #{key},
+			</if>
+			<if test="value != null">
+				`value` = #{value},
+			</if>
+			<if test="eid != null">
+				`eid` = #{eid},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+</mapper>
