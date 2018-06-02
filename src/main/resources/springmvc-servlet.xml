@@ -16,7 +16,7 @@
     <mvc:annotation-driven/>
     <context:annotation-config />
     <context:component-scan base-package="com.king.controller" />
-
+    <context:component-scan base-package="com.king.information"/>
     <!-- 定义跳转的文件的前后缀 ，视图模式配置-->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/" />

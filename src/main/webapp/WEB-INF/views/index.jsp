@@ -38,6 +38,7 @@
                             <dd><a href="javascript:;" data-href="${staticPath}/contactUs/list">联系我们</a></dd>
                             <dd><a href="javascript:;" data-href="${staticPath}/talentIdea/list">人才理念</a></dd>
                             <dd><a href="javascript:;" data-href="${staticPath}/recruit/list">招聘模块</a></dd>
+                            <dd><a href="javascript:;" data-href="${staticPath}/information/informationList">新闻资讯</a></dd>
                         </dl>
                     </li>
                 </ul>

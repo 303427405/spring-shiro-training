@@ -13,3 +13,7 @@
 <%--项目路径 --%>
 <c:set var="staticPath" value="${base}" />
 
+
+<%--yq专用路劲 --%>
+<c:set var="staticBase" value="${base}/static/yq" />
+
