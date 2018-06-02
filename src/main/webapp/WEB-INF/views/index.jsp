@@ -38,13 +38,11 @@
                             <dd><a href="javascript:;" data-href="${staticPath}/contactUs/list">联系我们</a></dd>
                             <dd><a href="javascript:;" data-href="${staticPath}/talentIdea/list">人才理念</a></dd>
                             <dd><a href="javascript:;" data-href="${staticPath}/recruit/list">招聘模块</a></dd>
-<<<<<<< HEAD
                             <dd><a href="javascript:;" data-href="${staticPath}/information/informationList">新闻资讯</a></dd>
-=======
                             <dd><a href="javascript:;" data-href="${staticPath}/spacePlan/list">空间计划</a></dd>
                             <dd><a href="javascript:;" data-href="${staticPath}/enterprise/list">企业服务</a></dd>
                             <dd><a href="javascript:;" data-href="${staticPath}/enterprise/list1">文件上传</a></dd>
->>>>>>> branch 'master' of https://github.com/303427405/spring-shiro-training.git
+                            <dd><a href="javascript:;" data-href="${staticPath}/chuangLiFang/list">首頁</a></dd>
                         </dl>
                     </li>
                 </ul>
