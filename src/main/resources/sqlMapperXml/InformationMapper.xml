@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.king.mapper.InformationMapper">
+
+
+
+
+
+    <select id="findAll" resultType="java.util.Map">
+	select * from information 
+    </select>
+
+
+    <select id="getGsdt" resultType="java.util.Map">
+	select * from information where identifier ='1' limit 0,4
+    </select>
+    
+        <select id="getPphd" resultType="java.util.Map">
+	select * from information where identifier ='2' limit 0,4
+    </select>
+    
+    
+        <select id="getHydt" resultType="java.util.Map">
+	select * from information where identifier ='3' limit 0,4
+    </select>
+    
+    
+    
+        <select id="getXpkx" resultType="java.util.Map">
+	select * from information where identifier ='4' limit 0,4
+    </select>
+    
+    <insert id="save" parameterType="java.util.Map">
+     insert into information (title,content,imageUrl,href) values(#{title},#{content},#{imageUrl},#{href})
+    </insert>
+    
+    <update id="edit"  parameterType="java.util.Map">
+    update information set title=#{title},content=#{content},imageUrl=#{imageUrl},href=#{href} where id=#{id}
+    
+    </update>
+    
+    
+    </mapper>
