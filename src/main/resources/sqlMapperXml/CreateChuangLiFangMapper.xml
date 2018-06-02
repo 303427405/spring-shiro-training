@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.king.mapper.CreateChuangLiFangMapper" >
+  <resultMap id="ChuangLiFangMap" type="com.king.vo.chuangLiFangVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="VARCHAR" />
+    <result column="jpg" property="jpg" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="text1" property="text1" jdbcType="VARCHAR" />
+    <result column="text2" property="text2" jdbcType="VARCHAR" />
+    <result column="text3" property="text3" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="DATE" />
+    <result column="updateTime" property="createTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="ChuangLiFang_Column_List" >
+    id, num, jpg, title, title, text1, text2, text3, createTime, updateTime
+  </sql>
+  <select id="select" resultMap="ChuangLiFangMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="ChuangLiFang_Column_List" />
+    from chuanglifang 
+    where status = '1'
+  </select>
+  
+  <select id="getById" resultMap="ChuangLiFangMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="ChuangLiFang_Column_List" />
+    from chuanglifang 
+    where status = '1'
+    <if test="id != null" >
+       and id = #{id,jdbcType=INTEGER}
+      </if>
+  </select>
+  
+  <update id="updateChuangLiFang" parameterType="com.king.vo.chuangLiFangVo" >
+    update chuanglifang
+    <set >
+      <if test="jpg != null" >
+        jpg = #{jpg,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="text1 != null" >
+        text1 = #{text1,jdbcType=VARCHAR},
+      </if>
+      <if test="text2 != null" >
+        text2 = #{text2,jdbcType=VARCHAR},
+      </if>
+      <if test="text3 != null" >
+        text3 = #{text3,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      updateTime = sysdate()
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
