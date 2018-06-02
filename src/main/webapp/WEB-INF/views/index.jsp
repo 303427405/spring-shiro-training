@@ -11,7 +11,7 @@
 <body>
     <div class="layui-layout layui-layout-admin">
         <div class="layui-header">
-            <div class="layui-logo">创立方后台管理系统</div>
+            <div class="layui-logo" style="font-size: 25px;width: 360px"><img alt="" style="height: 35px;width: 100px;"  src="${path}/static/image/1.jpg"/> 创立方后台管理系统</div>
             <ul class="layui-nav layui-layout-right">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
@@ -38,7 +38,13 @@
                             <dd><a href="javascript:;" data-href="${staticPath}/contactUs/list">联系我们</a></dd>
                             <dd><a href="javascript:;" data-href="${staticPath}/talentIdea/list">人才理念</a></dd>
                             <dd><a href="javascript:;" data-href="${staticPath}/recruit/list">招聘模块</a></dd>
+<<<<<<< HEAD
                             <dd><a href="javascript:;" data-href="${staticPath}/information/informationList">新闻资讯</a></dd>
+=======
+                            <dd><a href="javascript:;" data-href="${staticPath}/spacePlan/list">空间计划</a></dd>
+                            <dd><a href="javascript:;" data-href="${staticPath}/enterprise/list">企业服务</a></dd>
+                            <dd><a href="javascript:;" data-href="${staticPath}/enterprise/list1">文件上传</a></dd>
+>>>>>>> branch 'master' of https://github.com/303427405/spring-shiro-training.git
                         </dl>
                     </li>
                 </ul>

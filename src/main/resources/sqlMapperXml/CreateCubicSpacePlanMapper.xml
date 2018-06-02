@@ -14,9 +14,16 @@
   <sql id="Base_Column_List" >
     id, title, desc, imgUrl, mostFit, unitPrice, createTime, updateTime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  
+   <select id="find" resultType="com.king.model.CreateCubicSpacePlan">
     select 
-    <include refid="Base_Column_List" />
+ 	 *
+    from t_create_cubic_space_plan
+  </select>
+  
+  <select id="selectByPrimaryKey" resultType="com.king.model.CreateCubicSpacePlan" parameterType="java.lang.Integer" >
+    select 
+    *
     from t_create_cubic_space_plan
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -25,36 +32,44 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.king.model.CreateCubicSpacePlan" >
-    insert into t_create_cubic_space_plan (title, desc, imgUrl, 
-      mostFit, unitPrice, createTime, 
-      updateTime)
-    values (#{title,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, 
-      #{mostfit,jdbcType=VARCHAR}, #{unitprice,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
-      #{updatetime,jdbcType=TIMESTAMP})
+    
+    insert into t_create_cubic_space_plan (`title`,
+	`desc`,
+	`imgUrl`,
+	`mostFit`,
+	`unitPrice`,
+	`createTime`,
+	`updateTime`)
+    values (#{title}, #{desc}, #{imgurl}, 
+      #{mostfit}, #{unitprice}, #{createtime}, 
+      #{updatetime})
   </insert>
   <insert id="insertSelective" parameterType="com.king.model.CreateCubicSpacePlan" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into t_create_cubic_space_plan
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="title != null" >
-        title,
+        `title`,
       </if>
       <if test="desc != null" >
-        desc,
+        `desc`,
       </if>
       <if test="imgurl != null" >
-        imgUrl,
+        `imgUrl`,
       </if>
       <if test="mostfit != null" >
-        mostFit,
+        `mostFit`,
       </if>
       <if test="unitprice != null" >
-        unitPrice,
+        `unitPrice`,
       </if>
       <if test="createtime != null" >
-        createTime,
+       `createTime`,
       </if>
       <if test="updatetime != null" >
-        updateTime,
+        `updateTime`,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -85,38 +100,38 @@
     update t_create_cubic_space_plan
     <set >
       <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
+        `title` = #{title,jdbcType=VARCHAR},
       </if>
       <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+        `desc` = #{desc,jdbcType=VARCHAR},
       </if>
       <if test="imgurl != null" >
-        imgUrl = #{imgurl,jdbcType=VARCHAR},
+        `imgUrl` = #{imgurl,jdbcType=VARCHAR},
       </if>
       <if test="mostfit != null" >
-        mostFit = #{mostfit,jdbcType=VARCHAR},
+       `mostFit` = #{mostfit,jdbcType=VARCHAR},
       </if>
       <if test="unitprice != null" >
-        unitPrice = #{unitprice,jdbcType=VARCHAR},
+        `unitPrice` = #{unitprice,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
-        createTime = #{createtime,jdbcType=TIMESTAMP},
+        `createTime` = #{createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="updatetime != null" >
-        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+        `updateTime` = #{updatetime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.king.model.CreateCubicSpacePlan" >
     update t_create_cubic_space_plan
-    set title = #{title,jdbcType=VARCHAR},
-      desc = #{desc,jdbcType=VARCHAR},
-      imgUrl = #{imgurl,jdbcType=VARCHAR},
-      mostFit = #{mostfit,jdbcType=VARCHAR},
-      unitPrice = #{unitprice,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    set `title` = #{title,jdbcType=VARCHAR},
+      `desc` = #{desc,jdbcType=VARCHAR},
+      `imgUrl` = #{imgurl,jdbcType=VARCHAR},
+      `mostFit` = #{mostfit,jdbcType=VARCHAR},
+      `unitPrice` = #{unitprice,jdbcType=VARCHAR},
+      `createTime` = #{createtime,jdbcType=TIMESTAMP},
+      `updateTime` = #{updatetime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

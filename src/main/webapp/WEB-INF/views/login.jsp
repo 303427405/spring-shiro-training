@@ -23,7 +23,7 @@
         .top_div {
             background: #008ead;
             width: 100%;
-            height: 400px;
+            height: 370px;
         }
         .ipt {
             border: 1px solid #d3d3d3;
@@ -186,6 +186,7 @@
     </script>
 </head>
 <body onkeydown="enterlogin();">
+<span style="font-size:35px;"><img alt="" style="height: 45px;width: 120px;"  src="${path}/static/image/1.jpg"/>创立方后台管理系统</span>
 <div class="top_div"></div>
 <div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
     <form method="post" id="loginform" action="${path}/loginPost">
@@ -216,7 +217,7 @@
     </form>
 </div>
 <div style="text-align:center;">
-    <p><a href="http://www.dreamlu.net/" target="_blank">知行网络技术</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256912241'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1256912241%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
+    <p><a style="font-size: 23px;" href="http://www.dreamlu.net/" target="_blank"><img style="height: 25px;" alt="" src="${path}/static/image/2.jpg"/>知行网络技术</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256912241'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1256912241%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
 </div>
 </body>
 </html>

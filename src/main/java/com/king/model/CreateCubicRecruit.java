@@ -1,5 +1,7 @@
 package com.king.model;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -45,19 +47,19 @@ public class CreateCubicRecruit implements Serializable {
     }
 
     public String getJobrequire() {
-        return jobrequire;
+        return StringEscapeUtils.unescapeHtml3(jobrequire);
     }
 
     public void setJobrequire(String jobrequire) {
-        this.jobrequire = jobrequire == null ? null : jobrequire.trim();
+        this.jobrequire = jobrequire == null ? null : jobrequire;
     }
 
     public String getContentdesc() {
-        return contentdesc;
+        return StringEscapeUtils.unescapeHtml3(contentdesc);
     }
 
     public void setContentdesc(String contentdesc) {
-        this.contentdesc = contentdesc == null ? null : contentdesc.trim();
+        this.contentdesc = contentdesc == null ? null : contentdesc;
     }
 
     public Date getCreatetime() {

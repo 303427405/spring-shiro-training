@@ -7,6 +7,10 @@
 		<meta charset="utf-8">
 		<title>人才理念</title>
 		<meta name="renderer" content="webkit">
+		<script type="text/javascript" charset="utf-8" src="${staticPath}/static/ueditor/ueditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="${staticPath}/static/ueditor/ueditor.all.min.js"> </script>
+		<script type="text/javascript" charset="utf-8" src="${staticPath}/static/ueditor/lang/zh-cn/zh-cn.js"></script>
+		<link rel="stylesheet" href="${staticPath}/static/ueditor/themes/default/css/ueditor.css">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	</head>
 	<body>
@@ -23,7 +27,7 @@
 				<div class="layui-form-item layui-form-text">
 					<label class="layui-form-label">工作内容</label>
 					<div class="layui-input-block">
-						<textarea id="content" name="content" class="layui-textarea"  lay-verify="required" placeholder="请输入" autocomplete="off">${info.content}</textarea>
+						<script type="text/plain" id="content" name="content" style="width:1000px;height:240px;float: left;">${info.content}</script>
 					</div>
 				</div>
 			</div>
@@ -44,35 +48,38 @@
 	</div>
 	</body>
 <script>
-    layui.use('form', function(){
-        var form = layui.form;
-        form.render();
-        form.on('submit(*)', function(){
-            var id = $("#id").val();
-            var content = $("#content").val();
-            var imgurl = $("#imgurl").val();
-            $.ajax({
-                url:"${staticPath}/talentIdea/save",
-                data:{
-                    id:id,
-                    content:content,
-                    imgurl:imgurl
-                },
-                dataType:"JSON",
-                type:"POST",
-                success: function (data) {
-                    if(data.code == '0') {
-                        layer.msg(data.msg,{time:2000});
-                        window.location.href ="${staticPath}/talentIdea/list";
-                    } else{
-                        layer.msg(data.msg,{time:2000});
-                        return false;
+	$(function(){
+		var ue = UE.getEditor('content');
+        layui.use('form', function(){
+            var form = layui.form;
+            form.render();
+            form.on('submit(*)', function(){
+                var id = $("#id").val();
+                var content = ue.getContent();
+                var imgurl = $("#imgurl").val();
+                $.ajax({
+                    url:"${staticPath}/talentIdea/save",
+                    data:{
+                        id:id,
+                        content:content,
+                        imgurl:imgurl
+                    },
+                    dataType:"JSON",
+                    type:"POST",
+                    success: function (data) {
+                        if(data.code == '0') {
+                            layer.msg(data.msg,{time:2000});
+                            window.location.href ="${staticPath}/talentIdea/list";
+                        } else{
+                            layer.msg(data.msg,{time:2000});
+                            return false;
+                        }
                     }
-                }
-            })
-			return false;
+                })
+                return false;
+            });
         });
-    });
+	});
 
     function setImg(obj){//用于进行图片上传，返回地址
         var f=$(obj).val();

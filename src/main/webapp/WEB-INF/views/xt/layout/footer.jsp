@@ -7,8 +7,8 @@
 			<li><a href="./goInclf.html">走进创立方</a></li>
 			<li><a href="./news.html">新闻动态</a></li>
 			<li><a href="./proConstruct.html">产业构建</a></li>
-			<li><a href="./service.html">企业服务</a></li>
-			<li><a href="./spacePlan.html">空间计划</a></li>
+			<li><a href="${path }/enterprise/find">企业服务</a></li>
+			<li><a href="${path }/spacePlan/find">空间计划</a></li>
 			<li><a href="./jobChance.html">事业机会</a></li>
 			<li><a href="./contactUs.html">联系我们</a></li>
 		</ul>

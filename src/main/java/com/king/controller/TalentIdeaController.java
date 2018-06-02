@@ -4,6 +4,7 @@ import com.king.common.Constant;
 import com.king.enums.RespCode;
 import com.king.exception.ServiceException;
 import com.king.model.CreateCubicTalentIdea;
+import com.king.service.RecruitService;
 import com.king.service.TalentIdeaService;
 import com.king.vo.TalentIdeaVo;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class TalentIdeaController{
 
     @Autowired
     private TalentIdeaService talentIdeaService;
+
+    @Autowired
+    private RecruitService recruitService;
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView save(TalentIdeaVo talentIdeaVo) {
@@ -68,6 +72,7 @@ public class TalentIdeaController{
     public ModelAndView jsonData() {
         ModelMap model = new ModelMap();
         model.addAttribute("list",talentIdeaService.list());
+        model.addAttribute("recruitList",recruitService.list());
         return new ModelAndView("jsonView",model);
     }
 

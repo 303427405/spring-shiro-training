@@ -19,8 +19,8 @@
 			<li><a href="${path }/static/yq/goInclf.html" class="headNav-item">走进创立方</a></li>
 			<li><a href="${path }/static/yq/news.html" class="headNav-item">新闻动态</a></li>
 			<li><a href="${path }/static/yq/proConstruct.html" class="headNav-item">产业构建</a></li>
-			<li><a href="${path }/static/yq/service.html" class="headNav-item">企业服务</a></li>
-			<li><a href="${path }/static/yq/spacePlan.html" class="headNav-item">空间计划</a></li>
+			<li><a href="${path }/enterprise/find" class="headNav-item">企业服务</a></li>
+			<li><a href="${path }/spacePlan/find" class="headNav-item">空间计划</a></li>
 			<li><a href="${path }/static/yq/jobChance.html" class="headNav-item">事业机会</a></li>
 			<li><a href="${path }/static/yq/contactUs.html" class="headNav-item">联系我们</a></li>
 		</ul>

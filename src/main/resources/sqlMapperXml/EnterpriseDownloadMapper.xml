@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.king.mapper.EnterpriseDownloadMapper">
+
+
+	<select id="find" resultType="com.king.model.EnterpriseDownload"
+		parameterType="java.lang.Integer">
+		SELECT * from enterprise_download
+		<where>
+			<if test="id != null">
+				id = #{id}
+			</if>
+		</where>
+	</select>
+	<delete id="del" parameterType="java.lang.Integer">
+		delete from enterprise
+		where id =
+		#{id}
+	</delete>
+
+	<insert id="ins" parameterType="com.king.model.EnterpriseDownload">
+		insert into enterprise
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title != null">
+				`title`,
+			</if>
+
+			<if test="url != null">
+				`url`,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="title != null">
+				#{title},
+			</if>
+
+			<if test="url != null">
+				#{url},
+			</if>
+		</trim>
+	</insert>
+</mapper>

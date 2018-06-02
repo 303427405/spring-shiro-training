@@ -1,5 +1,7 @@
 package com.king.vo;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,7 +31,7 @@ public class ContactUsVo implements Serializable {
     }
 
     public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
+        this.content = content == null ? null : StringEscapeUtils.escapeHtml3(content);
     }
 
     public String getImgurl() {
